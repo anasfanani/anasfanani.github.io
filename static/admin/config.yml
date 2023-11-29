@@ -16,6 +16,7 @@ collections: # A list of collections the CMS should be able to edit
       summary: '{{title}}' # optional summary for a tree node, defaults to the inferred title field
     media_folder: ''
     public_folder: ''
+    path: '{{slug}}/index'
     fields: # The fields each document in this collection have
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
