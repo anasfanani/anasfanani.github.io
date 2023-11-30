@@ -1,10 +1,15 @@
+# https://decapcms.org/docs/beta-features/#working-with-a-local-git-repository
+local_backend: true # Allowin local development
 backend:
   name: github
   repo: anasfanani/anasfanani.github.io # Path to your GitHub repository
   branch: dev
+# backend:
+#   name: git-gateway
+
 
 media_folder: "assets/img" # Folder where user uploaded files should go
-public_folder: "img"
+public_folder: "/img"
 
 collections: # A list of collections the CMS should be able to edit
   - name: "post" # Used in routes, ie.: /admin/collections/:slug/edit
@@ -17,9 +22,11 @@ collections: # A list of collections the CMS should be able to edit
     media_folder: ''
     public_folder: ''
     path: '{{slug}}/index'
-    fields: # The fields each document in this collection have
+    fields: # The fields each document in this collection have https://decapcms.org/docs/widgets/#relation
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Tags",name: "tags",widget: "list",add_to_top: true}
+      - {label: "Categories",name: "categories",widget: "list",add_to_top: true}
+      - {label: "Publish Date", name: "date", widget: "datetime",date_format: "DD/MM/YYYY",time_format: "HH:mm", format: "YYYY-MM-DD HH:mm:ssZ" }
       - {label: "Intro Blurb", name: "description", widget: "text"}
       - {label: "Image", name: "image", widget: "image", required: false}
       - {label: "Body", name: "body", widget: "markdown"}
