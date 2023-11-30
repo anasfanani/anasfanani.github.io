@@ -12,9 +12,9 @@ media_folder: "assets/img" # Folder where user uploaded files should go
 public_folder: "/img"
 
 collections: # A list of collections the CMS should be able to edit
-  - name: "post" # Used in routes, ie.: /admin/collections/:slug/edit
-    label: "Post" # Used in the UI, ie.: "New Post"
-    folder: "content/post" # The path to the folder where the documents are stored
+  - name: "post_en" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "Post English" # Used in the UI, ie.: "New Post"
+    folder: "content/en/post" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
     nested:
       depth: 100 # max depth to show in the collection tree
@@ -30,6 +30,205 @@ collections: # A list of collections the CMS should be able to edit
       - {label: "Intro Blurb", name: "description", widget: "text"}
       - {label: "Image", name: "image", widget: "image", required: false}
       - {label: "Body", name: "body", widget: "markdown"}
+  - name: "post_id" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "Post Indonesia" # Used in the UI, ie.: "New Post"
+    folder: "content/id/post" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    nested:
+      depth: 100 # max depth to show in the collection tree
+      summary: '{{title}}' # optional summary for a tree node, defaults to the inferred title field
+    media_folder: ''
+    public_folder: ''
+    path: '{{slug}}/index'
+    fields: # The fields each document in this collection have https://decapcms.org/docs/widgets/#relation
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Tags",name: "tags",widget: "list",add_to_top: true}
+      - {label: "Categories",name: "categories",widget: "list",add_to_top: true}
+      - {label: "Publish Date", name: "date", widget: "datetime",date_format: "DD/MM/YYYY",time_format: "HH:mm", format: "YYYY-MM-DD HH:mm:ssZ" }
+      - {label: "Intro Blurb", name: "description", widget: "text"}
+      - {label: "Image", name: "image", widget: "image", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
+  - name: "page_en" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "Page English" # Used in the UI, ie.: "New Post"
+    folder: "content/en/page" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    nested:
+      depth: 100 # max depth to show in the collection tree
+      summary: '{{title}}' # optional summary for a tree node, defaults to the inferred title field
+    media_folder: ''
+    public_folder: ''
+    path: '{{slug}}/index'
+    fields: # The fields each document in this collection have https://decapcms.org/docs/widgets/#relation
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime",date_format: "DD/MM/YYYY",time_format: "HH:mm", format: "YYYY-MM-DD HH:mm:ssZ" }
+      - {label: "Layout", name: "layout", widget: "string",hint: "Custom Layout, read more at (https://stack.jimmycai.com)."}
+      - label: "Outputs"
+        name: "outputs"
+        widget: "list"
+        fields:
+          - {label: "Format", name: "format", widget: "string", hint: "Output format, default is HTML."}
+          - {label: "Extension", name: "extension", widget: "string", hint: "Output extension, default is .html."}
+          - {label: "Media Type", name: "mediaType", widget: "string", hint: "Output media type, default is text/html."}
+          - {label: "Rel", name: "rel", widget: "string", hint: "Output rel, default is canonical."}
+          - {label: "Link Title", name: "linkTitle", widget: "string", hint: "Output link title, default is empty."}
+          - {label: "No Index", name: "noIndex", widget: "boolean", hint: "Output no index, default is false."}
+          - {label: "No Follow", name: "noFollow", widget: "boolean", hint: "Output no follow, default is false."}
+          - {label: "No Archive", name: "noArchive", widget: "boolean", hint: "Output no archive, default is false."}
+          - {label: "No Snippet", name: "noSnippet", widget: "boolean", hint: "Output no snippet, default is false."}
+          - {label: "No Image Index", name: "noImageIndex", widget: "boolean", hint: "Output no image index, default is false."}
+          - {label: "No ODP", name: "noODP", widget: "boolean", hint: "Output no ODP, default is false."}
+          - {label: "No Translate", name: "noTranslate", widget: "boolean", hint: "Output no translate, default is false."}
+      - {label: "Slug", name: "slug", widget: "string",hint: "Custom slug URL."}
+      - label: "Menu"
+        name: "menu"
+        widget: "object"
+        hint: "Add new menu in home page."
+        collapsed: true
+        fields:
+          - label: "Main"
+            name: "main"
+            hint: "Main Menu"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {label: "Identifier", name: "identifier", widget: "string", hint: "Item ID"}
+              - {label: "Name", name: "name", widget: "string", hint: "Display text"}
+              - {label: "URL", name: "url", widget: "string", hint: "Link URL"}
+              - {label: "Weight", name: "weight", widget: "number", hint: "Priority of the item, lower value means higher priority."}
+              - label: "Params"
+                name: "params"
+                widget: "object"
+                fields:
+                  - {label: "Icon", name: "icon", widget: "string", hint: "Specify which SVG icon should be used. (https://tabler-icons.io/)"}
+                  - {label: "New Tab", name: "newtab", widget: "boolean", hint: "Open this link in new tab."}
+          - label: "Social"
+            name: "social"
+            hint: "Social Menu ( Icon Only)"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {label: "Identifier", name: "identifier", widget: "string", hint: "Item ID"}
+              - {label: "Name", name: "name", widget: "string", hint: "Display text"}
+              - {label: "URL", name: "url", widget: "string", hint: "Link URL"}
+              - {label: "Weight", name: "weight", widget: "number", hint: "Priority of the item, lower value means higher priority."}
+              - label: "Params"
+                name: "params"
+                widget: "object"
+                fields:
+                  - label: "Icon"
+                    name: "icon"
+                    widget: "string"
+                    hint: "If icon is set to archive, theme will look for archive.svg under `assets/icons` folder. This theme comes with some SVG icons from Tabler Icons (https://tabler-icons.io/) . You can find them under theme folder assets/icons. To include more icons, just download them from website above, and place them under assets/icons folder of your Hugo site."
+                  - {label: "New Tab", name: "newtab", widget: "boolean", hint: "Open this link in new tab."}
+      - {label: "Comments", name: "comments", widget: "boolean",hint: "Allow comments on this page.", default: true}
+      - label: "Links"
+        name: "links"
+        hint: "Links Menu"
+        widget: "object"
+        collapsed: true
+        fields:
+          - label: "Website"
+            name: "list"
+            widget: "list"
+            hint: "Website"
+            allow_add: true
+            fields: 
+              - {label: Title, name: title, widget: string}
+              - {label: Description, name: description, widget: string}
+              - {label: Website, name: website, widget: string}
+              - {label: Image, name: image, widget: string}
+      - {label: "Body", name: "body", widget: "markdown", hint: "You can leave empty if not used this.", required: false}
+  - name: "page_id" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "Page Indonesia" # Used in the UI, ie.: "New Post"
+    folder: "content/id/page" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    nested:
+      depth: 100 # max depth to show in the collection tree
+      summary: '{{title}}' # optional summary for a tree node, defaults to the inferred title field
+    media_folder: ''
+    public_folder: ''
+    path: '{{slug}}/index'
+    fields: # The fields each document in this collection have https://decapcms.org/docs/widgets/#relation
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime",date_format: "DD/MM/YYYY",time_format: "HH:mm", format: "YYYY-MM-DD HH:mm:ssZ" }
+      - {label: "Layout", name: "layout", widget: "string",hint: "Custom Layout, read more at (https://stack.jimmycai.com)."}
+      - label: "Outputs"
+        name: "outputs"
+        widget: "list"
+        fields:
+          - {label: "Format", name: "format", widget: "string", hint: "Output format, default is HTML."}
+          - {label: "Extension", name: "extension", widget: "string", hint: "Output extension, default is .html."}
+          - {label: "Media Type", name: "mediaType", widget: "string", hint: "Output media type, default is text/html."}
+          - {label: "Rel", name: "rel", widget: "string", hint: "Output rel, default is canonical."}
+          - {label: "Link Title", name: "linkTitle", widget: "string", hint: "Output link title, default is empty."}
+          - {label: "No Index", name: "noIndex", widget: "boolean", hint: "Output no index, default is false."}
+          - {label: "No Follow", name: "noFollow", widget: "boolean", hint: "Output no follow, default is false."}
+          - {label: "No Archive", name: "noArchive", widget: "boolean", hint: "Output no archive, default is false."}
+          - {label: "No Snippet", name: "noSnippet", widget: "boolean", hint: "Output no snippet, default is false."}
+          - {label: "No Image Index", name: "noImageIndex", widget: "boolean", hint: "Output no image index, default is false."}
+          - {label: "No ODP", name: "noODP", widget: "boolean", hint: "Output no ODP, default is false."}
+          - {label: "No Translate", name: "noTranslate", widget: "boolean", hint: "Output no translate, default is false."}
+      - {label: "Slug", name: "slug", widget: "string",hint: "Custom slug URL."}
+      - label: "Menu"
+        name: "menu"
+        widget: "object"
+        hint: "Add new menu in home page."
+        collapsed: true
+        fields:
+          - label: "Main"
+            name: "main"
+            hint: "Main Menu"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {label: "Identifier", name: "identifier", widget: "string", hint: "Item ID"}
+              - {label: "Name", name: "name", widget: "string", hint: "Display text"}
+              - {label: "URL", name: "url", widget: "string", hint: "Link URL"}
+              - {label: "Weight", name: "weight", widget: "number", hint: "Priority of the item, lower value means higher priority."}
+              - label: "Params"
+                name: "params"
+                widget: "object"
+                fields:
+                  - {label: "Icon", name: "icon", widget: "string", hint: "Specify which SVG icon should be used. (https://tabler-icons.io/)"}
+                  - {label: "New Tab", name: "newtab", widget: "boolean", hint: "Open this link in new tab."}
+          - label: "Social"
+            name: "social"
+            hint: "Social Menu ( Icon Only)"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {label: "Identifier", name: "identifier", widget: "string", hint: "Item ID"}
+              - {label: "Name", name: "name", widget: "string", hint: "Display text"}
+              - {label: "URL", name: "url", widget: "string", hint: "Link URL"}
+              - {label: "Weight", name: "weight", widget: "number", hint: "Priority of the item, lower value means higher priority."}
+              - label: "Params"
+                name: "params"
+                widget: "object"
+                fields:
+                  - label: "Icon"
+                    name: "icon"
+                    widget: "string"
+                    hint: "If icon is set to archive, theme will look for archive.svg under `assets/icons` folder. This theme comes with some SVG icons from Tabler Icons (https://tabler-icons.io/) . You can find them under theme folder assets/icons. To include more icons, just download them from website above, and place them under assets/icons folder of your Hugo site."
+                  - {label: "New Tab", name: "newtab", widget: "boolean", hint: "Open this link in new tab."}
+      - {label: "Comments", name: "comments", widget: "boolean",hint: "Allow comments on this page.", default: false}
+      - label: "Links"
+        name: "links"
+        hint: "Links Menu"
+        widget: "object"
+        collapsed: true
+        fields:
+          - label: "Website"
+            name: "list"
+            widget: "list"
+            hint: "Website"
+            allow_add: true
+            fields: 
+              - {label: Title, name: title, widget: string}
+              - {label: Description, name: description, widget: string}
+              - {label: Website, name: website, widget: string}
+              - {label: Image, name: image, widget: string}
+      - {label: "Body", name: "body", widget: "markdown", hint: "You can leave empty if not used this.", required: false}
+
   - name: "pages"
     label: "Pages"
     files:
