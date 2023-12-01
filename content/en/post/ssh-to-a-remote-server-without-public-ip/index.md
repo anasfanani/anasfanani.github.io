@@ -15,35 +15,37 @@ There many method to do this, i will share first method is with cloudflared tunn
 
 Lets start.
 
-# Cloudflare Zero Trust
+## Cloudflare Zero Trust
 
-## Requirements
+### Requirements
 
-You will need account and a domain.
+1. CloudFlare Accout
+2. Public Domain TLD.
 
-## Step By Step
+### Step By Step
 
-### Go to dashboard
+#### Go to Dashboard
 
-Goto dashboard <https://one.dash.cloudflare.com/> 
+- Go to Dashboard <https://one.dash.cloudflare.com/> 
+- Navigate to Access and click Tunnels
 
 ![tunnels link](1.png "Tunnels Link")
 
-### Create tunnels
+#### Create tunnels
 
-Click on a button
+Click on a <kbd>Create tunnels</kbd> button 
 
 ![create tunnels](2.png)
 
-### Configure SERVER
+#### Configure Server
 
-#### Name your tunnels
+##### Name your tunnels
 
 Give random name
 
 ![create  tunnels name](3.png)
 
-#### Install connector
+##### Install connector
 
 Here you need to copy the command and execute in server
 
@@ -73,7 +75,7 @@ cloudflared service install TOKEN
 
 You will got message `INF Linux service for cloudflared installed successfully`
 
-#### Route tunnels
+##### Route tunnels
 
 Go back to cloudflare then setup a Route 
 
@@ -86,9 +88,9 @@ Save, and see :
 
 ![active tunnels](7.png)
 
-### Configure CLIENT
+#### Configure Client
 
-#### Setup cloudflared
+##### Setup cloudflared
 
 Download cloudflared for client from <https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/installation/>
 
@@ -110,7 +112,7 @@ Rename to `cloudflared.exe`
 
 ![rename](10.png)
 
-#### Setup SSH
+##### Setup SSH
 
 Open SSH configuration
 
@@ -140,7 +142,7 @@ Host mytunnelfromzaure.anasfanani.com
   ProxyCommand C:/App/bin/cloudflared.exe access ssh --hostname %h
 ```
 
-#### Connect SSH
+##### Connect SSH
 
 Open your command prompt, type `ssh root@mytunnelfromzaure.anasfanani.com`
 
