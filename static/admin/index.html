@@ -10,10 +10,6 @@
   <body>
     <!-- Include the script that builds the page and powers Decap CMS -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-    <!-- <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/styles/default.min.css"> -->
-    <!-- <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script> -->
-    <!-- <script>hljs.highlightAll();</script> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> -->
     <script>
       
       var PostPreview = createClass({
@@ -37,7 +33,6 @@
             
           }
         },
-
         ArticleImage: function () {
           var image = this.props.entry ? this.props.entry.getIn(['data', 'image']) : '';
           if (image) {
@@ -65,16 +60,9 @@
           var wordCount = body ? body.split(' ').length : 0;
           var readingTime = wordCount ? Math.round(wordCount / 200) : 0;
           return h('main', { "className": "main full-width" },
-          // h('link', { "rel": "stylesheet", "href": "https://unpkg.com/@highlightjs/cdn-assets@11.9.0/styles/default.min.css" }),
-          // h('script', { "src": "https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js" }),
-            // h('script', {}, 'hljs.highlightAll();'),
-            
             h('div', { "className": "article-page" },
               h('article', {
                 "className": "main-article",
-                // style: {
-                //   borderRadius: '0'
-                // }
               },
                 h('header', { "className": "article-header" },
                   this.ArticleImage(),
@@ -88,7 +76,6 @@
                     ),
                     h('footer', { "className": "article-time" },
                       h('div', {},
-                        // h('time', { "className": "article-time--published" }, entry ? entry.getIn(['data', 'date']) : '')
                         h('time', { "className": "article-time--published" }, entry ? new Date(entry.getIn(['data', 'date'])).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }) : '')
                       ),
                       h('div', {},
@@ -109,43 +96,6 @@
           );
         }
       });
-
-      
-      // var PostPreview = createClass({
-      //   render: function() {
-      //     var entry = this.props.entry;
-      //     var body = entry.getIn(['data', 'body']);
-      //     var bg = this.props.getAsset(body);
-      //     var categories = entry.getIn(['data', 'categories']);
-      //     var wordCount = body.split(' ').length;
-      //     var readingTime = Math.round(wordCount / 200);
-      //     return h('article', {"className": "main-article"},
-      //       // h('h2', {"className": "article-title"}, entry.getIn(['data', 'title'])),
-      //       h('header', {"className": "article-header"},
-      //         h('div', {"className": "article-details"},
-      //           h('header', {"className": "article-category"},
-      //             categories.map(category => h('a', {}, category))
-      //           ),
-      //           h('div', {"className": "article-title-wrapper"},
-      //             h('h2', {"className": "article-title"},entry.getIn(['data', 'title'])),
-      //             h('h3', {"className": "article-subtitle"}, entry.getIn(['data', 'description']))
-      //           ),
-      //           h('footer', {"className": "article-time"},
-      //             h('div', {},
-      //               h('time', {"className": "article-time--published"}, entry.getIn(['data', 'date']))
-      //             ),
-      //             h('div', {},
-      //               h('time', {"className": "article-time--reading"}, readingTime + ' minute read')
-      //             )
-      //           )
-      //         )
-      //       ),
-      //       // h('body', {src: bg.toString()}),
-      //       h('section', {"className": "article-content"}, this.props.widgetFor('body'))
-      //       // h('div', {"className": "article-content"}, body)
-      //     );
-      //   }
-      // });
       CMS.registerPreviewStyle("/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css");
       CMS.registerPreviewTemplate("post_en", PostPreview);
       CMS.registerPreviewTemplate("post_id", PostPreview);
