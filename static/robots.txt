@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /search/
+Disallow: /id/search/
+Disallow: /admin/
+Sitemap: https://anasfanani.com/sitemap.xml
+Sitemap: https://anasfanani.com/en/sitemap.xml
+Sitemap: https://anasfanani.com/id/sitemap.xml
