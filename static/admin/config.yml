@@ -3,7 +3,7 @@ local_backend: true # Allowin local development
 backend:
   name: github
   repo: anasfanani/anasfanani.github.io # Path to your GitHub repository
-  branch: master
+  branch: dev
 # backend:
 #   name: git-gateway
 media_folder: "assets/img" # Folder where user uploaded files should go
