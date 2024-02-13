@@ -1,0 +1,20 @@
+en:
+  languageCode: en-US
+  languageDirection: ltr
+  languageName: English
+  weight: 1
+  contentDir: content/en
+  params:
+    sidebar:
+      emoji: 🇺🇸
+      subtitle: 'A notes about my walkthrough in internet and my life.'
+id:
+  languageCode: id-ID
+  languageDirection: ltr
+  languageName: Bahasa Indonesia
+  weight: 2
+  contentDir: content/id
+  params:
+    sidebar:
+      emoji: 🇮🇩
+      subtitle: 'Catatan tentang perjalanan saya di internet dan kehidupan saya.'
