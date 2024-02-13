@@ -1,14 +1,13 @@
 ---
-title: Pencarian
-date: 2023-12-01 14:06:50+07:00
-layout: search
+title: "Pencarian"
+slug: "search"
+layout: "search"
 outputs:
-  - html
-  - json
-slug: search
+    - html
+    - json
 menu:
-  main:
-    weight: 3
-    params:
-      icon: search
+    main:
+        weight: 3
+        params: 
+            icon: search
 ---
