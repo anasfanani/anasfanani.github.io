@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Not Found</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var userLang = navigator.language || navigator.userLanguage;
+            var langCode = userLang.split('-')[0];
+            var messageElement = document.getElementById('message-' + langCode);
+            if (messageElement) {
+                messageElement.style.display = 'block';
+            } else {
+                document.getElementById('message-en').style.display = 'block';
+            }
+        });
+    </script>
+</head>
+<body>
+    <div id="message-en" style="display: none;">
+        <h1>Page Not Found</h1>
+        <p>The page you're looking for does not exist.</p>
+    </div>
+    <div id="message-id" style="display: none;">
+        <h1>Halaman Tidak Ditemukan</h1>
+        <p>Halaman yang Anda cari tidak ada.</p>
+    </div>
+    <!-- Add more divs for other languages... -->
+</body>
+</html>
