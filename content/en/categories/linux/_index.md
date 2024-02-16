@@ -4,7 +4,7 @@ description: "Linux is a family of open-source Unix-like operating systems based
 image:
 
 # Badge style
-style:
-    background: "#2a9d8f"
-    color: "#fff"
+# style:
+#     background: "#2a9d8f"
+#     color: "#fff"
 ---
