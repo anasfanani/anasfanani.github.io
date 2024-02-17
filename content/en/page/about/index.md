@@ -11,16 +11,40 @@ comments: false
 links:
   - image: github.png
     website: https://github.com/anasfanani
-    description: Desc
+    description: My Github Address
     title: Github
 ---
-Hello everyone !
-This site was builded with Hugo and themes from <https://github.com/CaiJimmy/hugo-theme-stack>[](https://github.com/CaiJimmy/hugo-theme-stack)[](https://github.com/CaiJimmy/hugo-theme-stack).
+Hello, let me introduce myself. My name is Anas Fanani, usually called Anas. I am a technology enthusiast, especially in the field of Programming and Information Security.
 
-About me ? 
-I am Anas (a.k.a. @anasfanani). I love helping people who need help specially in Internet of thing.
-I considered myself as a hybrid between a Freelance Coder specifically into the php/html programming languages and implementations (ex. automation, creating a portofolio ), and a Security Pentester in webapps (ex. cms) or in linux environment (ex. privelege escalation).
+I enjoy learning programming languages, especially for PHP, HTML, Javascript, Bash, and Python programming languages.
 
-Do you want know more about me ? take a look in [aboutme](/about/me/ "aboutme") page.
-If you need contact me, go [contact me](/about/contact/ "Contact Me") here.
-I also want receive you comment and feedback about myself or my site, dont worry about your identity, you're still anonymous if you dont give your identity, please send me feedback [here](/about/feedback/ "here").
+My hobbies besides learning programming languages and information security are reading articles, watching movies, and playing games. I also like to write articles on my personal blog, which you can read on this website.
+
+Some open source projects that I have created can be seen on my [Github](https://github.com/anasfanani "Github").
+
+In addition, I also have several other basic skills that might help you, such as:
+
+- Social Media, Digital Marketing, Blogging
+- Microsoft Office, Excel
+- Linux, Android, Windows
+- Networking
+- Graphic Design
+- IT troubleshooting
+
+Some training certifications that I have:
+
+- Digital Marketing
+- Microsoft Excel
+- Graphic Design
+
+Languages that I master:
+
+- Indonesian
+- English
+- Javanese
+
+You may find this website has articles in English, that's because I am learning and getting used to writing articles in English. So, I apologize if there are mistakes in writing articles in English.
+
+If you want to contact me, you can contact me via my email at anas [at] anasfanani [dot] com or through my social media at [Facebook](https://facebook.com/anasfananialbashroh "Facebook"), [Telegram](https://t.me/anasfanani "Telegram").
+
+Thank you for visiting my website, I hope you get useful information on this website. If you want to discuss or ask about the articles I write, you can leave a comment on the article you read. I will try to answer your questions as soon as possible.
