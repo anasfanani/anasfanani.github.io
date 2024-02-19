@@ -1,0 +1,21 @@
+baseurl: https://anasfanani.com
+languageCode: en-us
+paginate: 5
+
+# Note: This title is overridden by the title in i18n config file
+title: Anas Fanani
+
+# theme: hugo-theme-stack
+
+DefaultContentLanguage: en
+defaultContentLanguageInSubdir: true
+# Set hasCJKLanguage to true if DefaultContentLanguage is in [zh-cn ja ko]
+# This will make .Summary and .WordCount behave correctly for CJK languages.
+hasCJKLanguage: false
+
+#disqusShortname: hugo-theme-stack
+
+# GA Tracking ID
+googleAnalytics: "G-WL12DSR5GX"
+
+#publishDir: ../public/demo
