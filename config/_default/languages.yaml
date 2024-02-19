@@ -3,7 +3,6 @@ en:
   languageDirection: ltr
   languageName: English
   weight: 1
-  contentDir: content/en
   params:
     sidebar:
       emoji: 🇺🇸
@@ -13,7 +12,6 @@ id:
   languageDirection: ltr
   languageName: Bahasa Indonesia
   weight: 2
-  contentDir: content/id
   params:
     sidebar:
       emoji: 🇮🇩
