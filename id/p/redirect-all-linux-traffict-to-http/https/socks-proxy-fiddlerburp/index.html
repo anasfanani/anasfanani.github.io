@@ -1,0 +1,334 @@
+<!doctype html><html lang=id-ID dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content='Tutorial to redirect all traffic in the Linux system to HTTP/HTTPS/Socks Proxy (Fiddler,Burp) and other proxy. Redirect TOR Proxy is possible too.'><title>Redirect all Linux traffict to HTTP/HTTPS/Socks Proxy (Fiddler,Burp)</title>
+<link rel=canonical href=https://anasfanani.com/id/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/><link rel=stylesheet href=/scss/style.min.d415687d4f0941a5511b1a1133e752fdc3145ee66b351cf5aa25ff3e06b08c7a.css><meta property='og:title' content='Redirect all Linux traffict to HTTP/HTTPS/Socks Proxy (Fiddler,Burp)'><meta property='og:description' content='Tutorial to redirect all traffic in the Linux system to HTTP/HTTPS/Socks Proxy (Fiddler,Burp) and other proxy. Redirect TOR Proxy is possible too.'><meta property='og:url' content='https://anasfanani.com/id/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/'><meta property='og:site_name' content='Anas Fanani'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Proxy'><meta property='article:tag' content='MITM'><meta property='article:published_time' content='2022-12-09T02:48:17+07:00'><meta property='article:modified_time' content='2022-12-09T02:48:17+07:00'><meta name=twitter:title content="Redirect all Linux traffict to HTTP/HTTPS/Socks Proxy (Fiddler,Burp)"><meta name=twitter:description content="Tutorial to redirect all traffic in the Linux system to HTTP/HTTPS/Socks Proxy (Fiddler,Burp) and other proxy. Redirect TOR Proxy is possible too."><link rel="shortcut icon" href=/img/favicon.png><script async src="https://www.googletagmanager.com/gtag/js?id=G-WL12DSR5GX"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-WL12DSR5GX",{anonymize_ip:!1})}</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Tampilkan Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/id/><img src=/img/avatar_hu1b7f860347e4317418ccfb5c19193385_11764_120x0_resize_q75_h2_box_3.webp width=120 height=120 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🇮🇩</span></figure><div class=site-meta><h1 class=site-name><a href=/id/>Anas Fanani</a></h1><h2 class=site-description>Catatan tentang perjalanan saya di internet dan kehidupan saya.</h2></div></header><ol class=social-menu><li><a href=https://github.com/anasfanani target=_blank title=GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com/anasfanani3 target=_blank title="X / Twitter" rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4l11.733 16H20L8.267 4z"/><path d="M4 20l6.768-6.768m2.46-2.46L20 4"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/id/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Beranda</span></a></li><li><a href=/id/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Arsip</span></a></li><li><a href=/id/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Pencarian</span></a></li><li><a href=/id/tautan/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>Tautan</span></a></li><li><a href=/id/about/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>Tentang Saya</span></a></li><li id=i18n-switch><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg>
+<select aria-label="Language Selection" name=language onchange="window.location.href=this.selectedOptions[0].value"><option value=https://anasfanani.com/en/>English</option><option value=https://anasfanani.com/id/ selected>Bahasa Indonesia</option></select></li><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Mode Gelap</span></li></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/id/categories/linux/>Linux</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/id/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/>Redirect all Linux traffict to HTTP/HTTPS/Socks Proxy (Fiddler,Burp)</a></h2><h3 class=article-subtitle>Tutorial to redirect all traffic in the Linux system to HTTP/HTTPS/Socks Proxy (Fiddler,Burp) and other proxy. Redirect TOR Proxy is possible too.</h3></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Dec 09, 2022</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>Waktu Membaca: 9 menit</time></div></footer><footer class=article-translations><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg><div><a href=https://anasfanani.com/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/ class=link>English</a></div></footer></div></header><section class=article-content><p>Lets start with simple opening, we dont talk about what is <em>Fiddler</em> , we talk about how to redirect all traffict to proxy.</p><p>Login as <code>root</code> first.</p><div class=codeblock><header><span class=codeblock-lang></span>
+<button class=codeblock-copy data-id=codeblock-id-0 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-0 style=display:none>user@ubuntuserver:/home/user# sudo su</code><pre><code>user@ubuntuserver:/home/user# sudo su</code></pre></div><p>First we need download <code>redsocks</code> and <code>iptables</code> in the Linux VM.
+Use this command <code>apt install redsocks iptables -y</code></p><div class=codeblock><header><span class=codeblock-lang></span>
+<button class=codeblock-copy data-id=codeblock-id-1 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-1 style=display:none>root@ubuntuserver:/home/user# apt install redsocks iptables -y</code><pre><code>root@ubuntuserver:/home/user# apt install redsocks iptables -y</code></pre></div><p>Then simply apply this code bellow, you can customize it for what you need.</p><div class=codeblock><header><span class=codeblock-lang></span>
+<button class=codeblock-copy data-id=codeblock-id-2 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-2 style=display:none>iptables -t nat -N REDSOCKS
+# Exclude local and reserved addresses
+iptables -t nat -A REDSOCKS -d 0.0.0.0/8 -j RETURN
+iptables -t nat -A REDSOCKS -d 10.0.0.0/8 -j RETURN
+iptables -t nat -A REDSOCKS -d 127.0.0.0/8 -j RETURN
+iptables -t nat -A REDSOCKS -d 169.254.0.0/16 -j RETURN
+iptables -t nat -A REDSOCKS -d 172.16.0.0/12 -j RETURN
+iptables -t nat -A REDSOCKS -d 192.168.0.0/16 -j RETURN
+iptables -t nat -A REDSOCKS -d 224.0.0.0/4 -j RETURN
+iptables -t nat -A REDSOCKS -d 240.0.0.0/4 -j RETURN
+# Now we need to add a rule that will redirect all packets from our custom REDSOCKS chain to the local port, we will use the default one – 12345
+iptables -t nat -A REDSOCKS -p tcp -j REDIRECT --to-ports 12345
+# Redirect all HTTP and HTTPS outgoing packets through Redsocks
+# iptables -t nat -A OUTPUT -p tcp --dport 443 -j REDSOCKS
+# iptables -t nat -A OUTPUT -p tcp --dport 80 -j REDSOCKS
+# Redirect all HTTP and HTTPS incoming packets through Redsocks
+# iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDSOCKS
+# iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDSOCKS
+## Filter all traffic from the own host
+## BE CAREFULL HERE IF THE PROXY-SERVER RUNS ON THIS MACHINE
+iptables -t nat -A OUTPUT -p tcp -j REDSOCKS
+# Filter all traffic that is routed over this host
+iptables -t nat -A PREROUTING -p tcp -j REDSOCKS</code><pre><code>iptables -t nat -N REDSOCKS
+# Exclude local and reserved addresses
+iptables -t nat -A REDSOCKS -d 0.0.0.0/8 -j RETURN
+iptables -t nat -A REDSOCKS -d 10.0.0.0/8 -j RETURN
+iptables -t nat -A REDSOCKS -d 127.0.0.0/8 -j RETURN
+iptables -t nat -A REDSOCKS -d 169.254.0.0/16 -j RETURN
+iptables -t nat -A REDSOCKS -d 172.16.0.0/12 -j RETURN
+iptables -t nat -A REDSOCKS -d 192.168.0.0/16 -j RETURN
+iptables -t nat -A REDSOCKS -d 224.0.0.0/4 -j RETURN
+iptables -t nat -A REDSOCKS -d 240.0.0.0/4 -j RETURN
+# Now we need to add a rule that will redirect all packets from our custom REDSOCKS chain to the local port, we will use the default one – 12345
+iptables -t nat -A REDSOCKS -p tcp -j REDIRECT --to-ports 12345
+
+# Redirect all HTTP and HTTPS outgoing packets through Redsocks
+# iptables -t nat -A OUTPUT -p tcp --dport 443 -j REDSOCKS
+# iptables -t nat -A OUTPUT -p tcp --dport 80 -j REDSOCKS
+# Redirect all HTTP and HTTPS incoming packets through Redsocks
+# iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDSOCKS
+# iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDSOCKS
+ 
+ 
+## Filter all traffic from the own host
+## BE CAREFULL HERE IF THE PROXY-SERVER RUNS ON THIS MACHINE
+iptables -t nat -A OUTPUT     -p tcp -j REDSOCKS 
+# Filter all traffic that is routed over this host
+iptables -t nat -A PREROUTING -p tcp -j REDSOCKS</code></pre></div><p>After all set, we need configure <code>/etc/redsocks.conf</code>
+Here the default configuration :</p><div class=codeblock><header><span class=codeblock-lang></span>
+<button class=codeblock-copy data-id=codeblock-id-3 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-3 style=display:none>base {
+// debug: connection progress & client list on SIGUSR1
+log_debug = off;
+// info: start and end of client session
+log_info = on;
+/* possible `log' values are:
+* stderr
+* "file:/path/to/file"
+* syslog:FACILITY facility is any of "daemon", "local0"..."local7"
+*/
+log = "syslog:daemon";
+// detach from console
+daemon = on;
+/* Change uid, gid and root directory, these options require root
+* privilegies on startup.
+* Note, your chroot may requre /etc/localtime if you write log to syslog.
+* Log is opened before chroot & uid changing.
+*/
+user = redsocks;
+group = redsocks;
+// chroot = "/var/chroot";
+/* possible `redirector' values are:
+* iptables - for Linux
+* ipf - for FreeBSD
+* pf - for OpenBSD
+* generic - some generic redirector that MAY work
+*/
+redirector = iptables;
+}
+redsocks {
+/* `local_ip' defaults to 127.0.0.1 for security reasons,
+* use 0.0.0.0 if you want to listen on every interface.
+* `local_*' are used as port to redirect to.
+*/
+local_ip = 127.0.0.1;
+local_port = 12345;
+// `ip' and `port' are IP and tcp-port of proxy-server
+// You can also use hostname instead of IP, only one (random)
+// address of multihomed host will be used.
+ip = 172.26.160.1;
+port = 8888;
+// known types: socks4, socks5, http-connect, http-relay
+type = http-connect;
+// login = "foobar";
+// password = "baz";
+}
+redudp {
+// `local_ip' should not be 0.0.0.0 as it's also used for outgoing
+// packets that are sent as replies - and it should be fixed
+// if we want NAT to work properly.
+local_ip = 127.0.0.1;
+local_port = 10053;
+// `ip' and `port' of socks5 proxy server.
+ip = 192.0.2.1;
+port = 1080;
+login = username;
+password = pazzw0rd;
+// kernel does not give us this information, so we have to duplicate it
+// in both iptables rules and configuration file. By the way, you can
+// set `local_ip' to 127.45.67.89 if you need more than 65535 ports to
+// forward ;-)
+// This limitation may be relaxed in future versions using contrack-tools.
+dest_ip = 192.0.2.2;
+dest_port = 53;
+udp_timeout = 30;
+udp_timeout_stream = 180;
+}
+dnstc {
+// fake and really dumb DNS server that returns "truncated answer" to
+// every query via UDP, RFC-compliant resolver should repeat same query
+// via TCP in this case.
+local_ip = 127.0.0.1;
+local_port = 5300;
+}
+// you can add more `redsocks' and `redudp' sections if you need.</code><pre><code>base {
+        // debug: connection progress &amp; client list on SIGUSR1
+        log_debug = off;
+
+        // info: start and end of client session
+        log_info = on;
+
+        /* possible `log&#39; values are:
+         *   stderr
+         *   &#34;file:/path/to/file&#34;
+         *   syslog:FACILITY  facility is any of &#34;daemon&#34;, &#34;local0&#34;...&#34;local7&#34;
+         */
+        log = &#34;syslog:daemon&#34;;
+
+        // detach from console
+        daemon = on;
+
+        /* Change uid, gid and root directory, these options require root
+         * privilegies on startup.
+         * Note, your chroot may requre /etc/localtime if you write log to syslog.
+         * Log is opened before chroot &amp; uid changing.
+         */
+        user = redsocks;
+        group = redsocks;
+        // chroot = &#34;/var/chroot&#34;;
+
+        /* possible `redirector&#39; values are:
+         *   iptables   - for Linux
+         *   ipf        - for FreeBSD
+         *   pf         - for OpenBSD
+         *   generic    - some generic redirector that MAY work
+         */
+        redirector = iptables;
+}
+
+redsocks {
+        /* `local_ip&#39; defaults to 127.0.0.1 for security reasons,
+         * use 0.0.0.0 if you want to listen on every interface.
+         * `local_*&#39; are used as port to redirect to.
+         */
+        local_ip = 127.0.0.1;
+        local_port = 12345;
+
+        // `ip&#39; and `port&#39; are IP and tcp-port of proxy-server
+        // You can also use hostname instead of IP, only one (random)
+        // address of multihomed host will be used.
+        ip = 172.26.160.1;
+        port = 8888;
+
+
+        // known types: socks4, socks5, http-connect, http-relay
+        type = http-connect;
+
+        // login = &#34;foobar&#34;;
+        // password = &#34;baz&#34;;
+}
+
+redudp {
+        // `local_ip&#39; should not be 0.0.0.0 as it&#39;s also used for outgoing
+        // packets that are sent as replies - and it should be fixed
+        // if we want NAT to work properly.
+        local_ip = 127.0.0.1;
+        local_port = 10053;
+
+        // `ip&#39; and `port&#39; of socks5 proxy server.
+        ip = 192.0.2.1;
+        port = 1080;
+        login = username;
+        password = pazzw0rd;
+
+        // kernel does not give us this information, so we have to duplicate it
+        // in both iptables rules and configuration file.  By the way, you can
+        // set `local_ip&#39; to 127.45.67.89 if you need more than 65535 ports to
+        // forward ;-)
+        // This limitation may be relaxed in future versions using contrack-tools.
+        dest_ip = 192.0.2.2;
+        dest_port = 53;
+
+        udp_timeout = 30;
+        udp_timeout_stream = 180;
+}
+
+dnstc {
+        // fake and really dumb DNS server that returns &#34;truncated answer&#34; to
+        // every query via UDP, RFC-compliant resolver should repeat same query
+        // via TCP in this case.
+        local_ip = 127.0.0.1;
+        local_port = 5300;
+}
+
+// you can add more `redsocks&#39; and `redudp&#39; sections if you need.</code></pre></div><p>In the <code>/etc/redsocks.conf</code> configuration, edit <code>ip</code> <code>port</code> <code>type</code> inside <code>redsocks { }</code>
+You can use nano or vim</p><div class=codeblock><header><span class=codeblock-lang></span>
+<button class=codeblock-copy data-id=codeblock-id-4 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-4 style=display:none>root@ubuntuserver:/home/user# nano /etc/redsocks.conf</code><pre><code>root@ubuntuserver:/home/user# nano /etc/redsocks.conf</code></pre></div><p>Then edit this :</p><div class=codeblock><header><span class=codeblock-lang></span>
+<button class=codeblock-copy data-id=codeblock-id-5 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-5 style=display:none>ip = 172.26.160.1;
+port = 8888;
+type = http-connect;</code><pre><code>ip = 172.26.160.1;
+port = 8888;
+type = http-connect;</code></pre></div><p>this is our proxy configuration, if you dont know what the ip host (Windows host) inside VM, you can check it with CMD, type it <code>ipconfig</code></p><p>Output is like this :</p><div class=codeblock><header><span class=codeblock-lang></span>
+<button class=codeblock-copy data-id=codeblock-id-6 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-6 style=display:none>C:UsersAdministrator>ipconfig
+Windows IP Configuration
+Ethernet adapter vEthernet (Default Switch):
+Connection-specific DNS Suffix . :
+Link-local IPv6 Address . . . . . : fe80::bf56:d73a:13b2:84ef%27
+IPv4 Address. . . . . . . . . . . : 172.26.160.1
+Subnet Mask . . . . . . . . . . . : 255.255.240.0
+Default Gateway . . . . . . . . . :
+Ethernet adapter vEthernet (WSL):
+Connection-specific DNS Suffix . :
+Link-local IPv6 Address . . . . . : fe80::3100:e28a:3a04:80ad%36
+IPv4 Address. . . . . . . . . . . : 172.20.48.1
+Subnet Mask . . . . . . . . . . . : 255.255.240.0
+Default Gateway . . . . . . . . . :</code><pre><code>C:UsersAdministrator&gt;ipconfig
+
+Windows IP Configuration
+
+Ethernet adapter vEthernet (Default Switch):
+
+   Connection-specific DNS Suffix  . :
+   Link-local IPv6 Address . . . . . : fe80::bf56:d73a:13b2:84ef%27
+   IPv4 Address. . . . . . . . . . . : 172.26.160.1
+   Subnet Mask . . . . . . . . . . . : 255.255.240.0
+   Default Gateway . . . . . . . . . :
+
+Ethernet adapter vEthernet (WSL):
+
+   Connection-specific DNS Suffix  . :
+   Link-local IPv6 Address . . . . . : fe80::3100:e28a:3a04:80ad%36
+   IPv4 Address. . . . . . . . . . . : 172.20.48.1
+   Subnet Mask . . . . . . . . . . . : 255.255.240.0
+   Default Gateway . . . . . . . . . :</code></pre></div><p>After all set, restart the redsocks using <code>pkill redsocks</code> , then start again with <code>redsocks</code></p><div class=codeblock><header><span class=codeblock-lang></span>
+<button class=codeblock-copy data-id=codeblock-id-7 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-7 style=display:none>root@ubuntuserver:/home/user# pkill redsocks
+root@ubuntuserver:/home/user# redsocks
+root@ubuntuserver:/home/user#</code><pre><code>root@ubuntuserver:/home/user# pkill redsocks
+root@ubuntuserver:/home/user# redsocks
+root@ubuntuserver:/home/user#</code></pre></div><p>Try to execute command like <code>curl</code> or <code>wget</code> (make sure proxy is running)</p><p>execute curl with proxy : <code>curl --proxy 172.26.160.1:8888 google.com</code></p><div class=codeblock><header><span class=codeblock-lang></span>
+<button class=codeblock-copy data-id=codeblock-id-8 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-8 style=display:none>root@ubuntuserver:/home/user# curl --proxy 172.26.160.1:8888 google.com
+&lt;HTML>&lt;HEAD>&lt;meta http-equiv="content-type" content="text/html;charset=utf-8">
+&lt;TITLE>301 Moved&lt;/TITLE>&lt;/HEAD>&lt;BODY>
+&lt;H1>301 Moved&lt;/H1>
+The document has moved
+&lt;A HREF="http://www.google.com/">here&lt;/A>.
+&lt;/BODY>&lt;/HTML>
+root@ubuntuserver:/home/user# curl --proxy 172.26.160.1:8888 anasfanani.id
+root@ubuntuserver:/home/user#</code><pre><code>root@ubuntuserver:/home/user# curl --proxy 172.26.160.1:8888 google.com
+&lt;HTML&gt;&lt;HEAD&gt;&lt;meta http-equiv=&#34;content-type&#34; content=&#34;text/html;charset=utf-8&#34;&gt;
+&lt;TITLE&gt;301 Moved&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;
+&lt;H1&gt;301 Moved&lt;/H1&gt;
+The document has moved
+&lt;A HREF=&#34;http://www.google.com/&#34;&gt;here&lt;/A&gt;.
+&lt;/BODY&gt;&lt;/HTML&gt;
+root@ubuntuserver:/home/user# curl --proxy 172.26.160.1:8888 anasfanani.id
+root@ubuntuserver:/home/user#</code></pre></div><p>Off course we can see the traffict in fiddler proxy because we set <code>--proxy</code> in curl</p><p><img src=/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/1_hu06fadc5894d5bd75b4b33d250a5c79e2_67402_d61b83040bd3c27680a555377311f730.webp width=1621 height=731 srcset="/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/1_hu06fadc5894d5bd75b4b33d250a5c79e2_67402_80fc6805dcce978b8b8eeab1aa0a1dc8.webp 480w, /en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/1_hu06fadc5894d5bd75b4b33d250a5c79e2_67402_da65b213d3059951c3e499796b7e2d37.webp 1024w, /en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/1_hu06fadc5894d5bd75b4b33d250a5c79e2_67402_6ca4e6fb18683d7f4bf41fb2db41be2e.webp 1621w" loading=lazy decoding=async alt="Traffic fiddler proxy" class=gallery-image data-flex-grow=221 data-flex-basis=532px></p><p>So lets use <code>curl</code> without <code>--proxy</code></p><div class=codeblock><header><span class=codeblock-lang></span>
+<button class=codeblock-copy data-id=codeblock-id-9 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-9 style=display:none>root@ubuntuserver:/home/user# curl google.com
+&lt;HTML>&lt;HEAD>&lt;meta http-equiv="content-type" content="text/html;charset=utf-8">
+&lt;TITLE>301 Moved&lt;/TITLE>&lt;/HEAD>&lt;BODY>
+&lt;H1>301 Moved&lt;/H1>
+The document has moved
+&lt;A HREF="http://www.google.com/">here&lt;/A>.
+&lt;/BODY>&lt;/HTML></code><pre><code>root@ubuntuserver:/home/user# curl google.com
+&lt;HTML&gt;&lt;HEAD&gt;&lt;meta http-equiv=&#34;content-type&#34; content=&#34;text/html;charset=utf-8&#34;&gt;
+&lt;TITLE&gt;301 Moved&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;
+&lt;H1&gt;301 Moved&lt;/H1&gt;
+The document has moved
+&lt;A HREF=&#34;http://www.google.com/&#34;&gt;here&lt;/A&gt;.
+&lt;/BODY&gt;&lt;/HTML&gt;</code></pre></div><p><img src=/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/2_hu3669cd05dbaffdc79839ce7749cc600d_82983_8982e9b68e16662d6e5495cfb6795e1f.webp width=1621 height=736 srcset="/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/2_hu3669cd05dbaffdc79839ce7749cc600d_82983_cdc4b88711a2f9d2a8a0e293c27cd792.webp 480w, /en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/2_hu3669cd05dbaffdc79839ce7749cc600d_82983_ad1bb419a9724d03d57508107dbd03e6.webp 1024w, /en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/2_hu3669cd05dbaffdc79839ce7749cc600d_82983_c2103dea5c61abf9453998ef4dd5fdda.webp 1621w" loading=lazy decoding=async alt="Captured Packet" class=gallery-image data-flex-grow=220 data-flex-basis=528px></p><p>Lets use with other linux program like <code>php</code> , execute <code>php -r "echo file_get_contents('http://ifconfig.me');"</code> and see the Fiddler</p><div class=codeblock><header><span class=codeblock-lang></span>
+<button class=codeblock-copy data-id=codeblock-id-10 data-copied-text=Copied!>
+Copy</button></header><code id=codeblock-id-10 style=display:none>root@ubuntuserver:/home/user# php -r "echo file_get_contents('http://ifconfig.me');"</code><pre><code>root@ubuntuserver:/home/user# php -r &#34;echo file_get_contents(&#39;http://ifconfig.me&#39;);&#34;</code></pre></div><p><img src=/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/3_hu2b1add98bfb8b6ccf6d930db4e94cda3_62008_7b690b3407685c34791f893f762ebb1b.webp width=1617 height=732 srcset="/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/3_hu2b1add98bfb8b6ccf6d930db4e94cda3_62008_60f8a9ca109a4ee34d50d2d43af149ce.webp 480w, /en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/3_hu2b1add98bfb8b6ccf6d930db4e94cda3_62008_fdcdb05e65d2b7f6e233fcded3965446.webp 1024w, /en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/3_hu2b1add98bfb8b6ccf6d930db4e94cda3_62008_0fefb30ef02b568ded51bcea45b07ca7.webp 1617w" loading=lazy decoding=async alt="Get IP Example" class=gallery-image data-flex-grow=220 data-flex-basis=530px></p><p>You can try see the packet from <code>apt update</code> or any other command.</p><p><img src=/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/4_hudba547f1d0b81cc6b5787f8e9cdbc100_149483_3888c9b4a21d947a551c80c305f8f202.webp width=1616 height=730 srcset="/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/4_hudba547f1d0b81cc6b5787f8e9cdbc100_149483_5ff9f3d8a19ba6608f23868d26b973ff.webp 480w, /en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/4_hudba547f1d0b81cc6b5787f8e9cdbc100_149483_a94aae6d2abf4fcddc7a0f9d406fe02b.webp 1024w, /en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/4_hudba547f1d0b81cc6b5787f8e9cdbc100_149483_42d21c003af052262ff90202e6a5d8c5.webp 1616w" loading=lazy decoding=async class=gallery-image data-flex-grow=221 data-flex-basis=531px></p><p>All is set, simple, if you have questions, ask in comments. Thanks</p></section><footer class=article-footer><section class=article-tags><a href=/id/tags/proxy/>Proxy</a>
+<a href=/id/tags/mitm/>MITM</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Konten terkait</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/id/p/install-bermacam-macam-proxy-open-source/><div class=article-details><h2 class=article-title>Install bermacam macam Proxy Open Source</h2></div></a></article><article><a href=/id/p/cara-install-dan-menggunakan-shadowtls-proxy/><div class=article-details><h2 class=article-title>Cara install dan menggunakan ShadowTLS Proxy</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo=anasfanani/anasfanani.github.io data-repo-id=R_kgDOKyjQBg data-category=Announcements data-category-id=DIC_kwDOKyjQBs4CbZXp data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"noborder_dark")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2019 -
+2024 Anas Fanani</section><section class=powerby>Dibangun dengan <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Tema <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=4.0.0-alpha.2>Stack</a></b> dirancang oleh <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@5.2.7/dist/photoswipe.css integrity="sha256-olf9rfn3AG8zR6lkPXkN3PZq63z8tElx7Ela6T4eklo=" crossorigin=anonymous><script type=module>
+    import StackGallery from '\/ts\/gallery.js';
+    import PhotoSwipeLightbox from 'https://cdn.jsdelivr.net/npm/photoswipe@5.2.7/dist/photoswipe-lightbox.esm.min.js';
+    
+    console.log(StackGallery)
+    StackGallery(document.querySelector('.article-content'));
+
+    const lightbox = new PhotoSwipeLightbox({
+        gallery: '.article-content',
+        children: '.gallery-image a',
+        pswpModule: () => import('https://cdn.jsdelivr.net/npm/photoswipe@5.2.7/dist/photoswipe.esm.min.js')
+    });
+    lightbox.init();
+</script></main></div><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
