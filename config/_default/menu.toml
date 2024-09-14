@@ -10,15 +10,26 @@
 [[social]]
 identifier = "github"
 name = "GitHub"
-url = "https://github.com/CaiJimmy/hugo-theme-stack"
+url = "https://github.com/anasfanani"
 
 [social.params]
 icon = "brand-github"
+newtab = true
 
 [[social]]
-identifier = "twitter"
-name = "Twitter"
-url = "https://twitter.com"
+identifier = "stackoverflow"
+name = "Stack Overflow"
+url = "https://stackoverflow.com/users/12716228"
 
 [social.params]
-icon = "brand-twitter"
+icon = "brand-stackoverflow"
+newtab = true
+
+[[social]]
+identifier = "xda"
+name = "XDA Forums"
+url = "https://xdaforums.com/m/9512959"
+
+[social.params]
+icon = "brand-xda"
+newtab = true

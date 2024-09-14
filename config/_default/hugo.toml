@@ -1,2 +1,5 @@
 # Theme
 theme = "hugo-theme-stack"
+
+# Google Tag
+googleAnalytics = "G-WL12DSR5GX"

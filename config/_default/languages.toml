@@ -1,0 +1,19 @@
+# English language
+[en]
+languageName = "English"
+languagedirection = "ltr"
+title = "Anas Fanani"
+weight = 1
+
+[en.params.sidebar]
+subtitle = "A notes..."
+
+# Indonesian language
+[id]
+languageName = "Bahasa Indonesia"
+languagedirection = "ltr"
+title = "Anas Fanani"
+weight = 2
+
+[id.params.sidebar]
+subtitle = "Sebuah catatan..."
