@@ -8,7 +8,7 @@ backend:
   squash_merges: true # Squash commits when merging pull requests ( Edtorial Workflow )
   name: github
   repo: anasfanani/anasfanani.github.io # Path to your GitHub repository
-  branch: main
+  branch: master
   commit_messages:
       create: Create {{collection}} “{{slug}}”
       update: Update {{collection}} “{{slug}}”
