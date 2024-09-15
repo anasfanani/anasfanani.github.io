@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>Content Manager</title>
+    <!-- Include the script that enables Netlify Identity on this page. -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
+  <body>
+    <!-- Include the script that builds the page and powers Decap CMS -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+      
+      var PostPreview = createClass({
+        componentDidMount: function() {
+          const iframe = document.getElementById('preview-pane');
+          const doc = iframe.contentDocument || iframe.contentWindow.document;
+
+          const link = doc.createElement('link');
+          link.rel = "stylesheet";
+          link.href = "https://unpkg.com/@highlightjs/cdn-assets@11.9.0/styles/github-dark.css";
+          doc.head.appendChild(link);
+
+          const script1 = doc.createElement('script');
+          script1.src = "https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js";
+          doc.head.appendChild(script1);
+
+          script1.onload = () => {
+            const script2 = doc.createElement('script');
+            script2.textContent = 'hljs.highlightAll();';
+            doc.head.appendChild(script2);
+            
+          }
+        },
+        ArticleImage: function () {
+          var image = this.props.entry ? this.props.entry.getIn(['data', 'image']) : '';
+          if (image) {
+            return h('div', { "className": "article-image" },
+              h('a', { href: this.props.getAsset(this.props.entry.getIn(['data', 'image'])).toString() },
+                h('img', {
+                  src: this.props.getAsset(this.props.entry.getIn(['data', 'image'])).toString(),
+                  srcset: this.props.getAsset(this.props.entry.getIn(['data', 'image'])).toString() + " 800w, " + this.props.getAsset(this.props.entry.getIn(['data', 'image'])).toString() + " 1600w",
+                  width: "800",
+                  height: "1200",
+                  loading: "lazy",
+                  alt: "Featured image of post " + this.props.entry.getIn(['data', 'title'])
+                })
+              )
+            );
+          }
+        },
+        render: function() {
+          var entry = this.props.entry;
+          var body = entry ? entry.getIn(['data', 'body']) : '';
+          var bg = body ? this.props.getAsset(body) : '';
+          var categories = entry ? entry.getIn(['data', 'categories']) : [];
+          var tags = entry ? entry.getIn(['data', 'tags']) : [];
+          var image = entry ? entry.getIn(['data', 'image']) : '';
+          var wordCount = body ? body.split(' ').length : 0;
+          var readingTime = wordCount ? Math.round(wordCount / 200) : 0;
+          return h('main', { "className": "main full-width" },
+            h('div', { "className": "article-page" },
+              h('article', {
+                "className": "main-article",
+              },
+                h('header', { "className": "article-header" },
+                  this.ArticleImage(),
+                  h('div', { "className": "article-details" },
+                    h('header', { "className": "article-category" },
+                      (categories ? categories : []).map(category => h('a', { style: {backgroundColor: '#2a9d8f', color: '#fff'} }, category))
+                    ),
+                    h('div', { "className": "article-title-wrapper" },
+                      h('h2', { "className": "article-title" }, entry ? entry.getIn(['data', 'title']) : ''),
+                      h('h3', { "className": "article-subtitle" }, entry ? entry.getIn(['data', 'description']) : '')
+                    ),
+                    h('footer', { "className": "article-time" },
+                      h('div', {},
+                        h('time', { "className": "article-time--published" }, entry ? new Date(entry.getIn(['data', 'date'])).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }) : '')
+                      ),
+                      h('div', {},
+                        h('time', { "className": "article-time--reading" }, readingTime ? readingTime + ' minute read' : '')
+                      )
+                    )
+                  )
+                ),
+                h('section', { "className": "article-content" }, body ? this.props.widgetFor('body') : ''),
+                h('footer', { "className": "article-footer" },
+                  h('section', { "className": "article-tags" },
+                    (tags ? tags : []).map(tags => h('a', {}, tags))
+                  )
+                ),
+                
+              )
+            )
+          );
+        }
+      });
+      CMS.registerPreviewStyle("/scss/style.min.css");
+      CMS.registerPreviewTemplate("posts_en", PostPreview);
+      CMS.registerPreviewTemplate("posts_id", PostPreview);
+      CMS.registerPreviewTemplate("posts", PostPreview);
+      CMS.registerPreviewTemplate("pages", PostPreview);
+    </script>
+  </body>
+</html>
+<!-- https://github.com/erezrokah/netlify-cms-reproductions/blob/d9300a4e970aa47dc4ec2054e7f30a0f85ae3796/public/index.html#L13 -->

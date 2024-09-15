@@ -1,0 +1,418 @@
+# # https://decapcms.org/docs/beta-features/#working-with-a-local-git-repository
+# # Allowing local development
+# local_backend: 
+#    url: http://localhost:8081/api/v1 
+# backend:
+#   name: git-gateway
+backend:
+  squash_merges: true # Squash commits when merging pull requests ( Edtorial Workflow )
+  name: github
+  repo: anasfanani/anasfanani.github.io # Path to your GitHub repository
+  branch: master
+  commit_messages:
+      create: Create {{collection}} “{{slug}}”
+      update: Update {{collection}} “{{slug}}”
+      delete: Delete {{collection}} “{{slug}}”
+      uploadMedia: Upload “{{path}}”
+      deleteMedia: Delete “{{path}}”
+      openAuthoring: '{{message}}'
+
+# Enable Editorial Workflow
+# https://decapcms.org/docs/editorial-workflows/
+publish_mode: editorial_workflow
+
+# The media_folder option specifies the folder path where uploaded files should be saved, relative to the base of the repo.
+media_folder: "assets/img" # ( Required )
+
+public_folder: "/img"
+site_url: https://anasfanani.com
+display_url: https://anasfanani.com
+logo_url: "https://anasfanani.com/favicon.png"
+
+# https://decapcms.org/docs/deploy-preview-links/
+show_preview_links: true
+
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "_"
+
+# https://decapcms.org/docs/i18n/
+i18n:
+  structure: multiple_files
+  locales:
+    - en
+    - id
+  default_locale: en
+
+collections:
+  - label: Posts in English
+    name: posts_en
+    label_singular: English Post
+    description: 'Available in english language only.'
+    folder: content/post
+    create: true
+    filter:
+      field: language
+      value: en
+    slug: '{{title}}'
+    preview_path: '/p/{{dirname}}/'
+    preview_path_date_field: updated_on
+    editor:
+      preview: true
+    summary: '{{date | date(''YYYY-MM-DD'')}} | {{title}}'
+    sortable_fields:
+      - commit_date
+      - title
+      - commit_author
+      - language.en
+    media_folder: ''
+    public_folder: ''
+    path: '{{slug}}/index'
+    extension : 'en.md'
+    format: 'frontmatter'
+    fields:
+      - label: Language
+        name: language
+        widget: hidden
+        default: en
+      - label: Title
+        name: title
+        widget: string
+        pattern:
+          - '.{30,}'
+          - Must have at least 30 characters
+      - label: Tags
+        name: tags
+        widget: list
+        allow_add: true
+      - label: Categories
+        name: categories
+        widget: relation
+        collection: categories
+        value_field: title
+        search_fields: ['title']
+        default: ['Uncategorized']
+        multiple: true
+      - label: Publish Date
+        name: date
+        widget: datetime
+        default: "{{now}}"
+        format: 'YYYY-MM-DD HH:mm:ssZ'
+      - label: Post Description
+        name: description
+        widget: text
+      - label: Image
+        name: image
+        widget: image
+        required: false
+      - label: Body
+        name: body
+        widget: markdown
+    view_groups:
+      - label: Year
+        field: date
+        pattern: '\d{4}'
+      - label: Drafts
+        field: draft
+    view_filters:
+      - label: Drafts
+        field: draft
+        pattern: true
+
+  - label: Posts in Indonesian
+    name: posts_id
+    label_singular: Indonesian Post
+    description: 'Available in Indonesian language only.'
+    folder: content/post
+    create: true
+    filter:
+      field: language
+      value: id
+    slug: '{{title}}'
+    preview_path: '/p/{{dirname}}/'
+    preview_path_date_field: updated_on
+    editor:
+      preview: true
+    summary: '{{date | date(''YYYY-MM-DD'')}} | {{title}}'
+    sortable_fields:
+      - commit_date
+      - title
+      - commit_author
+      - language.id
+    media_folder: ''
+    public_folder: ''
+    path: '{{slug}}/index'
+    extension : 'id.md'
+    format: 'frontmatter'
+    fields:
+      - label: Language
+        name: language
+        widget: hidden
+        default: id
+      - label: Title
+        name: title
+        widget: string
+        pattern:
+          - '.{30,}'
+          - Must have at least 30 characters
+      - label: Tags
+        name: tags
+        widget: list
+        allow_add: true
+      - label: Categories
+        name: categories
+        widget: relation
+        collection: categories
+        value_field: title
+        search_fields: ['title']
+        default: ['Uncategorized']
+        multiple: true
+      - label: Publish Date
+        name: date
+        widget: datetime
+        default: "{{now}}"
+        format: 'YYYY-MM-DD HH:mm:ssZ'
+      - label: Post Description
+        name: description
+        widget: text
+      - label: Image
+        name: image
+        widget: image
+        required: false
+      - label: Body
+        name: body
+        widget: markdown
+    view_groups:
+      - label: Year
+        field: date
+        pattern: '\d{4}'
+      - label: Drafts
+        field: draft
+    view_filters:
+      - label: Drafts
+        field: draft
+        pattern: true
+
+  - label: Multilingual Posts
+    name: posts
+    label_singular: 'Multilingual Post'
+    description: 'Available in multiple languages.'
+    folder: content/post
+    create: true
+    slug: '{{title}}'
+    preview_path: '/p/{{dirname}}/'
+    preview_path_date_field: "updated_on"
+    editor: 
+      preview: true
+    summary: "{{date | date('YYYY-MM-DD')}} | {{title}}"
+    i18n: true
+    media_folder: ''
+    public_folder: ''
+    path: '{{slug}}/index'
+    fields:
+      - label: Title
+        name: title
+        widget: string
+        pattern: ['.{20,}', "Must have at least 20 characters"]
+        i18n: true
+      - label: Tags
+        name: tags
+        widget: list
+        allow_add: true
+        i18n: true
+      - label: Categories
+        name: categories
+        widget: relation
+        collection: categories
+        value_field: title
+        search_fields: ['title']
+        default: ['Uncategorized']
+        multiple: true
+        i18n: true
+      - label: Publish Date
+        name: date
+        widget: datetime
+        format: 'YYYY-MM-DD HH:mm:ssZ'
+        default: "{{now}}"
+        i18n: duplicate
+      - label: Post Description
+        name: description
+        widget: text
+        i18n: true
+      - label: Image
+        name: image
+        widget: image
+        required: false
+        i18n: duplicate
+      - label: Body
+        name: body
+        widget: markdown
+        i18n: true
+    view_groups:
+      - label: Year
+        field: date
+        pattern: \d{4}
+      - label: Drafts
+        field: draft
+    view_filters:
+      - label: Drafts
+        field: draft
+        pattern: true
+    # meta: { path: { widget: string, label: 'Path', index_file: 'index' } }
+
+  - label: "Pages"
+    name: "pages"
+    label_singular: "Page"
+    folder: "content/page"
+    create: true
+    i18n: true
+    summary: "{{title}}"
+    media_folder: ''
+    public_folder: ''
+    path: '{{slug}}/index'
+    fields: # The fields each document in this collection have https://decapcms.org/docs/widgets/#relation
+      - {
+          label: "Title",
+          name: "title",
+          widget: "string",
+          i18n: true
+        }
+      - {
+          label: "Date", name: "date", widget: "datetime",
+          date_format: "DD/MM/YYYY",
+          time_format: "HH:mm",
+          format: "YYYY-MM-DD HH:mm:ssZ",
+          default: "{{now}}",
+          i18n: duplicate
+        }
+      - {
+          label: "Layout",
+          name: "layout",
+          widget: "string",
+          hint: "Custom Layout, read more at (https://stack.jimmycai.com).",
+          required: false,
+          i18n: true
+        }
+      - label: "Outputs"
+        name: "outputs"
+        widget: "list"
+        allow_add: true
+        required: false
+        i18n: true
+      - {
+          label: "Slug",
+          name: "slug",
+          widget: "string",
+          hint: "Custom slug URL.",
+          required: false,
+          i18n: duplicate
+        }
+      - label: "Menu"
+        name: "menu"
+        widget: "object"
+        hint: "Add new menu in home page."
+        collapsed: true
+        required: false
+        i18n: true
+        fields:
+          - label: "Main"
+            name: "main"
+            hint: "Main Menu"
+            widget: "object"
+            collapsed: true
+            required: false
+            i18n: true
+            fields:
+              - {label: "Identifier", name: "identifier", widget: "string", hint: "Item ID",required: false,i18n: true}
+              - {label: "Name", name: "name", widget: "string", hint: "Display text",required: false,i18n: true}
+              - {label: "URL", name: "url", widget: "string", hint: "Link URL",required: false,i18n: true}
+              - {label: "Weight", name: "weight", widget: "number", hint: "Priority of the item, lower value means higher priority.",required: false,i18n: true}
+              - label: "Params"
+                name: "params"
+                widget: "object"
+                required: false
+                fields:
+                  - {label: "Icon", name: "icon", widget: "string", hint: "Specify which SVG icon should be used. (https://tabler-icons.io/)",required: false,i18n: true}
+                  - {label: "New Tab", name: "newtab", widget: "boolean", hint: "Open this link in new tab.",required: false,i18n: true}
+          - label: "Social"
+            name: "social"
+            hint: "Social Menu ( Icon Only)"
+            widget: "object"
+            collapsed: true
+            required: false
+            i18n: true
+            fields:
+              - {label: "Identifier", name: "identifier", widget: "string", hint: "Item ID",required: false,i18n: true}
+              - {label: "Name", name: "name", widget: "string", hint: "Display text",required: false,i18n: true}
+              - {label: "URL", name: "url", widget: "string", hint: "Link URL",required: false,i18n: true}
+              - {label: "Weight", name: "weight", widget: "number", hint: "Priority of the item, lower value means higher priority.",required: false,i18n: true}
+              - label: "Params"
+                name: "params"
+                widget: "object"
+                required: false
+                fields:
+                  - label: "Icon"
+                    name: "icon"
+                    widget: "string"
+                    required: false
+                    hint: "If icon is set to archive, theme will look for archive.svg under `assets/icons` folder. This theme comes with some SVG icons from Tabler Icons (https://tabler-icons.io/) . You can find them under theme folder assets/icons. To include more icons, just download them from website above, and place them under assets/icons folder of your Hugo site."
+                  - {label: "New Tab", name: "newtab", widget: "boolean", hint: "Open this link in new tab.",required: false,i18n: true}
+      - {
+          label: "Comments",
+          name: "comments",
+          widget: "boolean",
+          hint: "Allow comments on this page.",
+          required: false,
+          i18n: true
+        }
+      - label: "Links"
+        name: "links"
+        widget: "list"
+        hint: "Website"
+        allow_add: true
+        required: false
+        i18n: true
+        fields: 
+          - {label: Title, name: title, widget: string, i18n: true}
+          - {label: Description, name: description, widget: string, i18n: true}
+          - {label: Website, name: website, widget: string, i18n: true}
+          - {label: Image, name: image, widget: image, i18n: true}
+      - {
+          label: "Body",
+          name: "body",
+          widget: "markdown",
+          hint: "You can leave empty if not used this.",
+          required: false,
+          i18n: true
+        } 
+
+  - label: "Categories"
+    name: "categories"
+    label_singular: "Category"
+    folder: "content/categories"
+    create: true
+    i18n: true
+    summary: "{{title}}"
+    media_folder: ''
+    public_folder: ''
+    path: '{{slug}}/_index'
+    fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
+        i18n: true
+      - label: "Description"
+        name: "description"
+        widget: "text"
+        i18n: true
+      - label: "Image"
+        name: "image"
+        widget: "image"
+        required: false
+        i18n: duplicate
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        required: false
+        i18n: true

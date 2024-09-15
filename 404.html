@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>404 Page Not Found</title>
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta property="og:title" content="404 Page not found">
+    <meta property="og:description" content="The page you are looking for doesn't exist.">
+    <link rel="stylesheet" href="/scss/style.min.css">
+    <script type="text/javascript">(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script>
+    <script type="text/javascript">(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var userLang = navigator.language || navigator.userLanguage;
+            var langCode = userLang.split('-')[0];
+            var messageElement = document.getElementById('message-' + langCode);
+            if (messageElement) {
+                messageElement.style.display = 'block';
+            } else {
+                document.getElementById('message-en').style.display = 'block';
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container main-container flex on-phone--column extended">
+        <main class="main ">
+            <div class="not-found-card">
+                <div id="message-en" style="display: none;">
+                    <h1 class="article-title">404 Page Not Found</h1>
+                    <h2 class="article-subtitle">The page you are looking for doesn't exist.</h2>
+                </div>
+                <div id="message-id" style="display: none;">
+                    <h1 class="article-title">404 Halaman Tidak ditemukan</h1>
+                    <h2 class="article-subtitle">Halaman yang Anda akses tidak ditemukan.</h2>
+                    <p class="article-subtitle">Kembali ke <a href="/">Beranda</a></p>
+                </div> 
+            </div>
+    </div>
+</body>
+</html>
