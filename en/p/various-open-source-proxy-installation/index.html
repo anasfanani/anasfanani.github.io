@@ -1,0 +1,803 @@
+<!doctype html><html lang=en dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Test & run as much available open source proxy for testing ( does not permanent modify your system wide vps ). For use in the clash/sagernet/sing-box/nekobox/v2rayn. Available proxy : TUIC, ShadowTLS, ShadowSocks, Brook, RESTLS."><title>Various Open Source Proxy Installation</title>
+<link rel=canonical href=https://anasfanani.com/en/p/various-open-source-proxy-installation/><link rel=stylesheet href=/scss/style.min.css><meta property='og:title' content="Various Open Source Proxy Installation"><meta property='og:description' content="Test & run as much available open source proxy for testing ( does not permanent modify your system wide vps ). For use in the clash/sagernet/sing-box/nekobox/v2rayn. Available proxy : TUIC, ShadowTLS, ShadowSocks, Brook, RESTLS."><meta property='og:url' content='https://anasfanani.com/en/p/various-open-source-proxy-installation/'><meta property='og:site_name' content='Anas Fanani'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Proxy'><meta property='article:published_time' content='2023-11-30T23:58:43+07:00'><meta property='article:modified_time' content='2023-11-30T23:58:43+07:00'><meta name=twitter:title content="Various Open Source Proxy Installation"><meta name=twitter:description content="Test & run as much available open source proxy for testing ( does not permanent modify your system wide vps ). For use in the clash/sagernet/sing-box/nekobox/v2rayn. Available proxy : TUIC, ShadowTLS, ShadowSocks, Brook, RESTLS."><link rel="shortcut icon" href=/favicon.png><script async src="https://www.googletagmanager.com/gtag/js?id=G-WL12DSR5GX"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-WL12DSR5GX")}</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/en/><img src=/img/avatar_hu12057436127379827588.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/en>Anas Fanani</a></h1><h2 class=site-description>A notes...</h2></div></header><ol class=menu-social><li><a href=https://github.com/anasfanani target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://stackoverflow.com/users/12716228 target=_blank title="Stack Overflow" rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-stackoverflow"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v1a2 2 0 002 2h12a2 2 0 002-2v-1"/><path d="M8 16h8"/><path d="M8.322 12.582l7.956.836"/><path d="M8.787 9.168l7.826 1.664"/><path d="M10.096 5.764l7.608 2.472"/></svg></a></li><li><a href=https://xdaforums.com/m/9512959 target=_blank title="XDA Forums" rel=me><svg width="24" height="24" viewBox="0 0 192 192" fill="none" stroke=""><path stroke-linecap="round" stroke-linejoin="round" stroke-width="12" d="M82 38H42v108h40l8 24m20-132h40v108h-40"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/en/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/en/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/en/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li><a href=/en/about/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>About</span></a></li><li class=menu-bottom-section><ol class=menu><li id=i18n-switch><svg class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg>
+<select name=language title=language onchange="window.location.href=this.selectedOptions[0].value"><option value=https://anasfanani.com/en/ selected>English</option><option value=https://anasfanani.com/id/>Bahasa Indonesia</option></select></li><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#greeting>Greeting</a></li><li><a href=#tuic>TUIC</a><ol><li><a href=#standalone-installation>Standalone installation</a></li><li><a href=#configure-client>Configure Client</a><ol><li><a href=#android>Android</a></li></ol></li></ol></li><li><a href=#shadowtls>ShadowTLS</a><ol><li><a href=#client>Client</a><ol><li><a href=#linux>Linux</a></li><li><a href=#android-1>Android</a></li></ol></li></ol></li><li><a href=#shadowsocks-rust>Shadowsocks-rust</a><ol><li><a href=#server>Server</a></li><li><a href=#client-1>Client</a></li></ol></li><li><a href=#brook>Brook</a><ol><li><a href=#server-1>Server</a></li><li><a href=#client-2>Client</a></li><li><a href=#various-running-mode>Various Running Mode</a><ol><li><a href=#websocket>WebSocket</a></li><li><a href=#websocket-secure>WebSocket Secure</a></li><li><a href=#quic-server>QUIC Server</a></li></ol></li></ol></li><li><a href=#restls>RESTLS</a><ol><li><a href=#run-shadowsocks-server>Run shadowsocks server</a></li><li><a href=#run-restls-server>Run restls server</a></li><li><a href=#client-3>Client</a></li></ol></li><li><a href=#quick-install>Quick Install</a></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/en/categories/linux/>Linux</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/en/p/various-open-source-proxy-installation/>Various Open Source Proxy Installation</a></h2><h3 class=article-subtitle>Test & run as much available open source proxy for testing ( does not permanent modify your system wide vps ). For use in the clash/sagernet/sing-box/nekobox/v2rayn. Available proxy : TUIC, ShadowTLS, ShadowSocks, Brook, RESTLS.</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Nov 30, 2023</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>9 minute read</time></div></footer><footer class=article-translations><svg class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg><div><a href=https://anasfanani.com/id/p/install-bermacam-macam-proxy-open-source/ class=link>Bahasa Indonesia</a></div></footer></div></header><section class=article-content><h2 id=greeting>Greeting</h2><p>Test every proxy program on <a class=link href=https://sing-box.sagernet.org/configuration/inbound/ target=_blank rel=noopener>https://sing-box.sagernet.org/configuration/inbound/</a></p><p>Welcome, this is my environment :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>Linux ip-xxx-xxx-xxx-xxx 6.2.0-1013-xxx <span class=c1>#13~22.04.1-Ubuntu SMP Fri Sep  8 17:29:56 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux</span>
+</span></span><span class=line><span class=cl>ubuntu@ip-xxx-xxx-xxx-xxx:~$ cat /etc/lsb-release
+</span></span><span class=line><span class=cl><span class=nv>DISTRIB_ID</span><span class=o>=</span>Ubuntu
+</span></span><span class=line><span class=cl><span class=nv>DISTRIB_RELEASE</span><span class=o>=</span>22.04
+</span></span><span class=line><span class=cl><span class=nv>DISTRIB_CODENAME</span><span class=o>=</span>jammy
+</span></span><span class=line><span class=cl><span class=nv>DISTRIB_DESCRIPTION</span><span class=o>=</span><span class=s2>&#34;Ubuntu 22.04.3 LTS&#34;</span>
+</span></span><span class=line><span class=cl>ubuntu@ip-xxx-xxx-xxx-xxx:~$
+</span></span></code></pre></td></tr></table></div></div><p>Each proxy run with <code>screen</code> program, so when client disconnected, can be returned in current workspace.</p><p>Example :</p><p>Open tuic workspace :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>screen -R tuic
+</span></span></code></pre></td></tr></table></div></div><p>Minimize workspace :</p><p>send keyboard event <code>CTRL+A</code> then <code>CTRL+D</code></p><p>Return workspace :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>screen -R tuic
+</span></span></code></pre></td></tr></table></div></div><p>Usefull when need for debuging purpose.</p><h2 id=tuic>TUIC</h2><p>Source : <a class=link href=https://github.com/chika0801/tuic-install/tree/main target=_blank rel=noopener>https://github.com/chika0801/tuic-install/tree/main</a></p><h3 id=standalone-installation>Standalone installation</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=nb>cd</span> /root/
+</span></span><span class=line><span class=cl>mkdir tuic
+</span></span><span class=line><span class=cl><span class=nb>cd</span> tuic
+</span></span><span class=line><span class=cl>wget https://github.com/EAimTY/tuic/releases/latest/download/tuic-server-1.0.0-x86_64-unknown-linux-gnu
+</span></span><span class=line><span class=cl>chmod +x tuic-server-1.0.0-x86_64-unknown-linux-gnu
+</span></span></code></pre></td></tr></table></div></div><p>Download config :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>curl -Lo config_tuic.json https://raw.githubusercontent.com/chika0801/tuic-install/main/config_server.json
+</span></span></code></pre></td></tr></table></div></div><p>Or create new file <code>config_tuic.json</code> :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;server&#34;</span>: <span class=s2>&#34;[::]:443&#34;</span>,
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;users&#34;</span>: <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;ee48f7be-6ae9-5654-9b61-8466aa8e16bc&#34;</span>: <span class=s2>&#34;chika&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>,
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;certificate&#34;</span>: <span class=s2>&#34;/root/tuic/cert.pem&#34;</span>,
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;private_key&#34;</span>: <span class=s2>&#34;/root/tuic/key.pem&#34;</span>,
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;congestion_control&#34;</span>: <span class=s2>&#34;bbr&#34;</span>,
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;alpn&#34;</span>: <span class=o>[</span><span class=s2>&#34;h3&#34;</span><span class=o>]</span>,
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;log_level&#34;</span>: <span class=s2>&#34;info&#34;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=sb>```</span>shell
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Generate your certificate <span class=k>then</span> save as <span class=sb>`</span>/root/tuic/cert.pem<span class=sb>`</span> and <span class=sb>`</span>/root/tuic/cert.pem<span class=sb>`</span>.
+</span></span><span class=line><span class=cl>Or generate self-signed certificate with :
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=sb>```</span>shell
+</span></span><span class=line><span class=cl>openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days <span class=m>3650</span> -nodes -subj <span class=s2>&#34;/C=XX/ST=StateName/L=CityName/O=CompanyName/OU=CompanySectionName/CN=CommonNameOrHostname&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p>Run your TUIC server :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>./tuic-server-1.0.0-x86_64-unknown-linux-gnu -c config_tuic.json
+</span></span></code></pre></td></tr></table></div></div><h3 id=configure-client>Configure Client</h3><h4 id=android>Android</h4><ul><li>Use NekoBox</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;relay&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;server&#34;</span><span class=p>:</span> <span class=s2>&#34;chika.example.com:443&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;uuid&#34;</span><span class=p>:</span> <span class=s2>&#34;ee48f7be-6ae9-5654-9b61-8466aa8e16bc&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;password&#34;</span><span class=p>:</span> <span class=s2>&#34;chika&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;ip&#34;</span><span class=p>:</span> <span class=s2>&#34;10.0.0.1&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;congestion_control&#34;</span><span class=p>:</span> <span class=s2>&#34;bbr&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;alpn&#34;</span><span class=p>:</span> <span class=p>[</span><span class=s2>&#34;h3&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;local&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;server&#34;</span><span class=p>:</span> <span class=s2>&#34;127.0.0.1:50000&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;log_level&#34;</span><span class=p>:</span> <span class=s2>&#34;info&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>Configure as needed.</p><h2 id=shadowtls>ShadowTLS</h2><p>Reference :</p><ul><li><a class=link href=https://github.com/ihciah/shadow-tls/wiki/Run-with-Docker-Compose target=_blank rel=noopener>https://github.com/ihciah/shadow-tls/wiki/Run-with-Docker-Compose</a></li><li><a class=link href=https://github.com/ihciah/shadow-tls/issues/70 target=_blank rel=noopener>https://github.com/ihciah/shadow-tls/issues/70</a></li><li><a class=link href=https://github.com/ihciah/shadow-tls/wiki/How-to-Run#parameters target=_blank rel=noopener>How to Run · ihciah/shadow-tls Wiki · GitHub</a></li><li><a class=link href=https://github.com/ihciah/shadow-tls/blob/master/docker-compose.yml target=_blank rel=noopener>https://github.com/ihciah/shadow-tls/blob/master/docker-compose.yml</a></li><li><a class=link href=https://github.com/ihciah/shadow-tls target=_blank rel=noopener>GitHub - ihciah/shadow-tls: A proxy to expose real tls handshake to the firewall</a></li></ul><p><strong>Prerequisites:</strong></p><p>Install Docker both server and client side.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sudo apt install docker-compose
+</span></span></code></pre></td></tr></table></div></div><p><strong>VPS :</strong></p><p>Create a file <code>docker-compose.yml</code> and fill it with the following code:</p><p>Example 1 :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;3.5&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>services</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>shadowsocks</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>shadowsocks/shadowsocks-libev</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>restart</span><span class=p>:</span><span class=w> </span><span class=l>always</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>command</span><span class=p>:</span><span class=w> </span><span class=l>/bin/sh -c &#39;exec ss-server -s 0.0.0.0 -p 24000 -k EXAMPLE_PASSWORD_SS -m chacha20-ietf-poly1305 -t 300&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>shadow-tls</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>ghcr.io/ihciah/shadow-tls:latest</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>restart</span><span class=p>:</span><span class=w> </span><span class=l>always</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>ports</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=s2>&#34;8443:8443&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>environment</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>MODE=server</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=c># - V3=1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>LISTEN=0.0.0.0:8443</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>SERVER=shadowsocks:24000</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>TLS=cloud.tencent.com:443</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>PASSWORD=EXAMPLE_PASSWORD_ST</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>depends_on</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>shadowsocks</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>Example 2 :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;3.5&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>services</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>shadowsocks</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>ghcr.io/shadowsocks/ssserver-rust:latest</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>restart</span><span class=p>:</span><span class=w> </span><span class=l>always</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>command</span><span class=p>:</span><span class=w> </span><span class=l>/bin/sh -c &#39;exec ssserver -s &#34;[::]:24000&#34; -k &#34;3SYJ/f8nmVuzKvKglykRQDSgg10e/ADilkdRWrrY&gt;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>shadow-tls</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>ghcr.io/ihciah/shadow-tls:latest</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>restart</span><span class=p>:</span><span class=w> </span><span class=l>always</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>ports</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=s2>&#34;443:443&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>environment</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>STRICT=1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>MODE=server</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>V3=1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>FASTOPEN=true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>WILDCARD_SNI=all</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>LISTEN=0.0.0.0:443</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>SERVER=shadowsocks:24000</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>TLS=google.com:443</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>PASSWORD=st</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>depends_on</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>shadowsocks</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>Run container with :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>docker-compose up -d
+</span></span></code></pre></td></tr></table></div></div><h3 id=client>Client</h3><h4 id=linux>Linux</h4><p>Create file <code>docker-compose.yml</code> and fill it with the following code:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;3.5&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>services</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>shadow-tls</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>ghcr.io/ihciah/shadow-tls:latest</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>restart</span><span class=p>:</span><span class=w> </span><span class=l>always</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>ports</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=s2>&#34;3443:3443&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>environment</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>MODE=client</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=c># - V3=1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>LISTEN=0.0.0.0:3443</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>SERVER=YOUR_VPS_IP:8443</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>TLS=cloud.tencent.com</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>PASSWORD=EXAMPLE_PASSWORD_ST</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>shadowsocks</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=l>shadowsocks/shadowsocks-libev</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>restart</span><span class=p>:</span><span class=w> </span><span class=l>always</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>command</span><span class=p>:</span><span class=w> </span><span class=l>/bin/sh -c &#39;exec ss-local -b 0.0.0.0 -l 1080 -s shadow-tls -p 3443 -k EXAMPLE_PASSWORD_SS -m chacha20-ietf-poly1305 -t 300&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>ports</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=s2>&#34;1080:1080&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>depends_on</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>shadow-tls</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>Run :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>docker-compose up -d
+</span></span></code></pre></td></tr></table></div></div><p>Verify connection success :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>curl ipinfo.io -x socks5h://127.0.0.1:1080 -v
+</span></span></code></pre></td></tr></table></div></div><p><strong>Notes:</strong></p><p>Stop docker:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>docker-compose down
+</span></span></code></pre></td></tr></table></div></div><p>Remove docker:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>docker-compose down
+</span></span><span class=line><span class=cl>sudo apt remove docker docker-compose
+</span></span><span class=line><span class=cl>sudo apt autoremove
+</span></span></code></pre></td></tr></table></div></div><p>Connect IP_VPS:3443 with shadowsocks protocol on your mobile phones or PCs will work or connect IP_VPS:1080 with sock5h protocol on browser proxy.
+I use Windows, I use Docker for Windows.</p><h4 id=android-1>Android</h4><p>Configuration Reference :</p><ul><li><a class=link href=https://sing-box.sagernet.org/examples/shadowtls/ target=_blank rel=noopener>ShadowTLS - sing-box</a></li></ul><p>With NekoBox.apk then use this config template :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;dns&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;fakeip&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;enabled&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;inet4_range&#34;</span><span class=p>:</span> <span class=s2>&#34;198.18.0.0/15&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;inet6_range&#34;</span><span class=p>:</span> <span class=s2>&#34;fc00::/18&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;independent_cache&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;rules&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;disable_cache&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;inbound&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=s2>&#34;tun-in&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;server&#34;</span><span class=p>:</span> <span class=s2>&#34;dns-fake&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;servers&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;address&#34;</span><span class=p>:</span> <span class=s2>&#34;https://8.8.8.8/dns-query&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;address_resolver&#34;</span><span class=p>:</span> <span class=s2>&#34;dns-direct&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;strategy&#34;</span><span class=p>:</span> <span class=s2>&#34;ipv4_only&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;tag&#34;</span><span class=p>:</span> <span class=s2>&#34;dns-remote&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;address&#34;</span><span class=p>:</span> <span class=s2>&#34;local&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;address_resolver&#34;</span><span class=p>:</span> <span class=s2>&#34;dns-local&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;detour&#34;</span><span class=p>:</span> <span class=s2>&#34;direct&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;strategy&#34;</span><span class=p>:</span> <span class=s2>&#34;ipv4_only&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;tag&#34;</span><span class=p>:</span> <span class=s2>&#34;dns-direct&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;address&#34;</span><span class=p>:</span> <span class=s2>&#34;local&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;detour&#34;</span><span class=p>:</span> <span class=s2>&#34;direct&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;tag&#34;</span><span class=p>:</span> <span class=s2>&#34;dns-local&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;address&#34;</span><span class=p>:</span> <span class=s2>&#34;rcode://success&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;tag&#34;</span><span class=p>:</span> <span class=s2>&#34;dns-block&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;address&#34;</span><span class=p>:</span> <span class=s2>&#34;fakeip&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;strategy&#34;</span><span class=p>:</span> <span class=s2>&#34;ipv4_only&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;tag&#34;</span><span class=p>:</span> <span class=s2>&#34;dns-fake&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;inbounds&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;listen&#34;</span><span class=p>:</span> <span class=s2>&#34;0.0.0.0&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;listen_port&#34;</span><span class=p>:</span> <span class=mi>6450</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;override_address&#34;</span><span class=p>:</span> <span class=s2>&#34;8.8.8.8&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;override_port&#34;</span><span class=p>:</span> <span class=mi>53</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;tag&#34;</span><span class=p>:</span> <span class=s2>&#34;dns-in&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;direct&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;domain_strategy&#34;</span><span class=p>:</span> <span class=s2>&#34;&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;endpoint_independent_nat&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;inet4_address&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;172.19.0.1/28&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;mtu&#34;</span><span class=p>:</span> <span class=mi>9000</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;sniff&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;sniff_override_destination&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;stack&#34;</span><span class=p>:</span> <span class=s2>&#34;mixed&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;tag&#34;</span><span class=p>:</span> <span class=s2>&#34;tun-in&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;tun&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;domain_strategy&#34;</span><span class=p>:</span> <span class=s2>&#34;&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;listen&#34;</span><span class=p>:</span> <span class=s2>&#34;0.0.0.0&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;listen_port&#34;</span><span class=p>:</span> <span class=mi>2080</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;sniff&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;sniff_override_destination&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;tag&#34;</span><span class=p>:</span> <span class=s2>&#34;mixed-in&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;mixed&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;log&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;level&#34;</span><span class=p>:</span> <span class=s2>&#34;trace&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;outbounds&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;shadowsocks&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;tag&#34;</span><span class=p>:</span> <span class=s2>&#34;proxy&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;method&#34;</span><span class=p>:</span> <span class=s2>&#34;2022-blake3-chacha20-poly1305&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;password&#34;</span><span class=p>:</span> <span class=s2>&#34;3SYJ/f8nmVuzKvKglykRQDSgg10e/ADilkdRWrrY9HU=&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;detour&#34;</span><span class=p>:</span> <span class=s2>&#34;shadowtls-out&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;multiplex&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;enabled&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;max_connections&#34;</span><span class=p>:</span> <span class=mi>4</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;min_streams&#34;</span><span class=p>:</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;domain_strategy&#34;</span><span class=p>:</span> <span class=s2>&#34;&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;shadowtls&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;tag&#34;</span><span class=p>:</span> <span class=s2>&#34;shadowtls-out&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;server&#34;</span><span class=p>:</span> <span class=s2>&#34;IP_VPS&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;server_port&#34;</span><span class=p>:</span> <span class=mi>443</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>3</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;password&#34;</span><span class=p>:</span> <span class=s2>&#34;st&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;tls&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;enabled&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;insecure&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;server_name&#34;</span><span class=p>:</span> <span class=s2>&#34;google.com&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;utls&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=nt>&#34;enabled&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nt>&#34;fingerprint&#34;</span><span class=p>:</span> <span class=s2>&#34;chrome&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;tag&#34;</span><span class=p>:</span> <span class=s2>&#34;direct&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;direct&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;tag&#34;</span><span class=p>:</span> <span class=s2>&#34;bypass&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;direct&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;tag&#34;</span><span class=p>:</span> <span class=s2>&#34;block&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;block&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;tag&#34;</span><span class=p>:</span> <span class=s2>&#34;dns-out&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;dns&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;route&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;auto_detect_interface&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;rules&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;outbound&#34;</span><span class=p>:</span> <span class=s2>&#34;dns-out&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;port&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=mi>53</span>
+</span></span><span class=line><span class=cl>        <span class=p>]</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;inbound&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=s2>&#34;dns-in&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;outbound&#34;</span><span class=p>:</span> <span class=s2>&#34;dns-out&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;ip_cidr&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=s2>&#34;224.0.0.0/3&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=s2>&#34;ff00::/8&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;outbound&#34;</span><span class=p>:</span> <span class=s2>&#34;block&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;source_ip_cidr&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=s2>&#34;224.0.0.0/3&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=s2>&#34;ff00::/8&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>]</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=shadowsocks-rust>Shadowsocks-rust</h2><p>Shadowsocks rust version is more updated version.</p><h3 id=server>Server</h3><p>Reference : <a class=link href=https://crates.io/crates/shadowsocks-rust target=_blank rel=noopener>https://crates.io/crates/shadowsocks-rust</a></p><p>Create config :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>   <span class=nt>&#34;server&#34;</span><span class=p>:</span><span class=s2>&#34;0.0.0.0&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>   <span class=nt>&#34;server_port&#34;</span><span class=p>:</span><span class=mi>80</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>   <span class=nt>&#34;password&#34;</span><span class=p>:</span><span class=s2>&#34;x&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>   <span class=nt>&#34;method&#34;</span><span class=p>:</span><span class=s2>&#34;chacha20-ietf-poly1305&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>Download binary :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>mkdir /root/shadowsocks/
+</span></span><span class=line><span class=cl><span class=nb>cd</span> /root/shadowsocks/
+</span></span><span class=line><span class=cl>wget https://github.com/shadowsocks/shadowsocks-rust/releases/download/v1.16.2/shadowsocks-v1.16.2.x86_64-unknown-linux-musl.tar.xz
+</span></span><span class=line><span class=cl>tar -xf shadowsocks-v1.16.2.x86_64-unknown-linux-musl.tar.xz
+</span></span><span class=line><span class=cl>chmod +x ssserver
+</span></span><span class=line><span class=cl>./ssserver -c config.json
+</span></span></code></pre></td></tr></table></div></div><h3 id=client-1>Client</h3><p>Android :
+Use NekoBox.apk</p><h2 id=brook>Brook</h2><p>Reference :</p><ul><li><a class=link href=https://github.com/txthinking/brook target=_blank rel=noopener>GitHub - txthinking/brook: A cross-platform programmable network tool. 一个跨平台可编程网络工具.</a></li></ul><h3 id=server-1>Server</h3><p>Quick download and run :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>wget https://github.com/txthinking/brook/releases/download/v20230606/brook_linux_amd64
+</span></span><span class=line><span class=cl>chmod +x brook_linux_amd64 
+</span></span><span class=line><span class=cl>./brook_linux_amd64 server -l :80 -p x
+</span></span></code></pre></td></tr></table></div></div><p>Other method to run is install nami for download brook :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>bash &lt;<span class=o>(</span>curl https://bash.ooo/nami.sh<span class=o>)</span>
+</span></span><span class=line><span class=cl>nami install brook
+</span></span><span class=line><span class=cl>brook server -l :9999 -p hello
+</span></span></code></pre></td></tr></table></div></div><p>Or you can download from latest release : <a class=link href=https://github.com/txthinking/brook/releases target=_blank rel=noopener>Releases · txthinking/brook · GitHub</a></p><h3 id=client-2>Client</h3><p>At example I&rsquo;m using cli version :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>./brook_linux_arm7 client -s<span class=o>=</span><span class=s2>&#34;IP_SERVER:80&#34;</span> -p x --socks5<span class=o>=</span><span class=s2>&#34;127.0.0.1:1080&#34;</span> --udpovertcp
+</span></span></code></pre></td></tr></table></div></div><p>Then verify connection success with <code>curl</code> command :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>curl -x socks5h://127.0.0.1:1080 http://ipinfo.io -v
+</span></span></code></pre></td></tr></table></div></div><p>Various Client can download here : <a class=link href=https://github.com/txthinking/brook/releases target=_blank rel=noopener>Releases · txthinking/brook · GitHub</a></p><p>Quick Link :</p><ul><li><a class=link href=https://apps.apple.com/us/app/brook-network-tool/id1216002642 target=_blank rel=noopener>Apple</a></li><li><a class=link href=https://github.com/txthinking/brook/releases/latest/download/Brook.apk target=_blank rel=noopener>Android</a></li><li><a class=link href=https://apps.apple.com/us/app/brook-network-tool/id1216002642 target=_blank rel=noopener>MAC</a></li><li><a class=link href=https://github.com/txthinking/brook/releases/latest/download/Brook.exe target=_blank rel=noopener>Windows</a></li><li><a class=link href=https://github.com/txthinking/brook/releases/latest/download/Brook.bin target=_blank rel=noopener>Linux</a></li><li>[OpenWRT](<a class=link href=https://github.com/txthinking/brook/releases target=_blank rel=noopener>Releases · txthinking/brook · GitHub</a>)</li></ul><h3 id=various-running-mode>Various Running Mode</h3><p>In order to use SSL, lets generate self-signed certificate for testing environment, my current <em>brook</em> workspace is <code>/root/brook/</code>.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>openssl req -x509 -newkey rsa:4096 -keyout /root/brook/key.pem -out /root/brook/cert.pem -sha256 -days <span class=m>3650</span> -nodes -subj <span class=s2>&#34;/C=XX/ST=StateName/L=CityName/O=CompanyName/OU=CompanySectionName/CN=CommonNameOrHostname&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=websocket>WebSocket</h4><p>Server Command :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>./brook_linux_amd64 wsserver -l :80 -p x
+</span></span></code></pre></td></tr></table></div></div><p>Client Command :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>./brook_linux_arm7 wsclient -s<span class=o>=</span><span class=s2>&#34;ws://IP_SERVER:80&#34;</span> -p x --socks5<span class=o>=</span><span class=s2>&#34;127.0.0.1:1080&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=websocket-secure>WebSocket Secure</h4><p>Server Command :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>./brook_linux_amd64 wssserver --domainaddress example.com:443 --cert /root/brook/cert.pem --certkey /root/brook/key.pem -p x
+</span></span></code></pre></td></tr></table></div></div><p>Client Command :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>./brook_linux_arm7 wssclient --wssserver <span class=s2>&#34;wss://example.com&#34;</span> --address <span class=s2>&#34;IP_SERVER:443&#34;</span> --insecure -p x --socks5<span class=o>=</span><span class=s2>&#34;127.0.0.1:1080&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=quic-server>QUIC Server</h4><p>Server Command :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>./brook_linux_amd64 quicserver --domainaddress example.com:443 -p x
+</span></span></code></pre></td></tr></table></div></div><p>Client Command :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>./brook_linux_arm7 quicclient --quicserver <span class=s2>&#34;quic://example.com:443&#34;</span> --address <span class=s2>&#34;IP_SERVER:443&#34;</span> --insecure -p x --socks5<span class=o>=</span><span class=s2>&#34;127.0.0.1:1080&#34;</span> 
+</span></span></code></pre></td></tr></table></div></div><h2 id=restls>RESTLS</h2><p>Ref :</p><p><a class=link href=https://github.com/3andne/restls target=_blank rel=noopener>https://github.com/3andne/restls</a></p><h3 id=run-shadowsocks-server>Run shadowsocks server</h3><p>Create <code>config.json</code> in <code>/root/shadowsocks</code> :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>   <span class=nt>&#34;server&#34;</span><span class=p>:</span><span class=s2>&#34;0.0.0.0&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>   <span class=nt>&#34;server_port&#34;</span><span class=p>:</span><span class=mi>8888</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>   <span class=nt>&#34;password&#34;</span><span class=p>:</span><span class=s2>&#34;x&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>   <span class=nt>&#34;method&#34;</span><span class=p>:</span><span class=s2>&#34;chacha20-ietf-poly1305&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>Download and unzip Shadowsocks-rust :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>wget https://github.com/shadowsocks/shadowsocks-rust/releases/download/v1.16.2/shadowsocks-v1.16.2.x86_64-unknown-linux-musl.tar.xz
+</span></span><span class=line><span class=cl>tar -xf shadowsocks-v1.16.2.x86_64-unknown-linux-musl.tar.xz
+</span></span><span class=line><span class=cl>chmod +x ssserver
+</span></span><span class=line><span class=cl>./ssserver -c config.json
+</span></span></code></pre></td></tr></table></div></div><p>Dont forget to run as screen.</p><h3 id=run-restls-server>Run restls server</h3><p>Latest release : <a class=link href=https://github.com/3andne/restls/releases target=_blank rel=noopener>https://github.com/3andne/restls/releases</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>mkdir /root/restls
+</span></span><span class=line><span class=cl><span class=nb>cd</span> /root/restls
+</span></span><span class=line><span class=cl>wget https://github.com/3andne/restls/releases/download/v0.1.1/restls-x86_64-unknown-linux-musl
+</span></span><span class=line><span class=cl>chmod +x restls-x86_64-unknown-linux-musl
+</span></span></code></pre></td></tr></table></div></div><h3 id=client-3>Client</h3><p>You will need this <a class=link href=https://github.com/3andne/Clash.Meta/releases/tag/v0.1.0-pre4-restls target=_blank rel=noopener>Release Clash.Meta with Restls Support · 3andne/Clash.Meta · GitHub</a></p><p>Example Configuration :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>port</span><span class=p>:</span><span class=w> </span><span class=m>7890</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>socks-port</span><span class=p>:</span><span class=w> </span><span class=m>7891</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>redir-port</span><span class=p>:</span><span class=w> </span><span class=m>7892</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>mixed-port</span><span class=p>:</span><span class=w> </span><span class=m>7893</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>tproxy-port</span><span class=p>:</span><span class=w> </span><span class=m>7895</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>ipv6</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>mode</span><span class=p>:</span><span class=w> </span><span class=l>rule</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>log-level</span><span class=p>:</span><span class=w> </span><span class=l>silent</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>allow-lan</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>external-controller</span><span class=p>:</span><span class=w> </span><span class=m>0.0.0.0</span><span class=p>:</span><span class=m>9090</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c>## external-ui: /path/to/ui/folder/</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c>## external-ui-name: xd</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c>## external-ui-url: &#34;https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>secret</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>bind-address</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;*&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>unified-delay</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>profile</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>store-selected</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>dns</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>enable</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>ipv6</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>enhanced-mode</span><span class=p>:</span><span class=w> </span><span class=l>redir-host</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>listen</span><span class=p>:</span><span class=w> </span><span class=m>0.0.0.0</span><span class=p>:</span><span class=m>7874</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>nameserver</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=m>8.8.8.8</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=m>1.0.0.1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=l>https://dns.google/dns-query</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>fallback</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=m>1.1.1.1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=m>8.8.4.4</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=l>https://cloudflare-dns.com/dns-query</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=m>112.215.203.254</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>default-nameserver</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=m>8.8.8.8</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=m>1.1.1.1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=m>112.215.203.254</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>proxies</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>restls-tls13</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>ss</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>server</span><span class=p>:</span><span class=w> </span><span class=m>54.169.105.185</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>port</span><span class=p>:</span><span class=w> </span><span class=m>443</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>cipher</span><span class=p>:</span><span class=w> </span><span class=l>chacha20-ietf-poly1305</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>password</span><span class=p>:</span><span class=w> </span><span class=l>x</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>plugin</span><span class=p>:</span><span class=w> </span><span class=l>restls</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>plugin-opts</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>host</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;www.microsoft.com&#34;</span><span class=w> </span><span class=c># Must be a TLS 1.3 server</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>password</span><span class=p>:</span><span class=w> </span><span class=l>x</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>version-hint</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;tls13&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>client-id: chrome # One of</span><span class=p>:</span><span class=w> </span><span class=l>chrome, ios, firefox or safari</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>restls-tls12</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>ss</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>server</span><span class=p>:</span><span class=w> </span><span class=m>54.169.105.185</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>port</span><span class=p>:</span><span class=w> </span><span class=m>443</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>cipher</span><span class=p>:</span><span class=w> </span><span class=l>chacha20-ietf-poly1305</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>password</span><span class=p>:</span><span class=w> </span><span class=l>x</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>plugin</span><span class=p>:</span><span class=w> </span><span class=l>restls</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>plugin-opts</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>host</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;vscode.dev&#34;</span><span class=w> </span><span class=c># Must be a TLS 1.2 server</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>password</span><span class=p>:</span><span class=w> </span><span class=l>x</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>version-hint</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;tls12&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>client-id: firefox # One of</span><span class=p>:</span><span class=w> </span><span class=l>chrome, ios, firefox or safari</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>proxy-groups</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>RESTLS</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>select</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>proxies</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>restls-tls13</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>restls-tls12</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=l>DIRECT</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>rules</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=l>MATCH,RESTLS</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>The connection is unstable.</p><h2 id=quick-install>Quick Install</h2><p><a class=link href=https://github.com/aleskxyz/reality-ezpz target=_blank rel=noopener>GitHub - aleskxyz/reality-ezpz: Install sing-box/xray and configure vless / tuic / hysteria2 for reality or tls (letsencrypt) over different transport protocols (tcp, http, grpc and websocket) with user management capability in CLI, TUI and Telegram bot by a single command in docker compose!</a></p></section><footer class=article-footer><section class=article-tags><a href=/en/tags/proxy/>Proxy</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/en/p/mitm-proxy-and-proxy-chain-linux-programs-in-ubuntu/><div class=article-details><h2 class=article-title>Mitm Proxy And Proxy Chain Linux Programs In Ubuntu</h2></div></a></article><article><a href=/en/p/how-to-install-and-use-the-shadowtls-proxy/><div class=article-details><h2 class=article-title>How to install and use the ShadowTLS Proxy</h2></div></a></article><article><a href=/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/><div class=article-details><h2 class=article-title>Redirect all Linux traffict to HTTP/HTTPS/Socks Proxy (Fiddler,Burp)</h2></div></a></article><article><a href=/en/p/shell-script-compiler-/-encoder-and-how-to-decode/><div class=article-details><h2 class=article-title>Shell Script Compiler / Encoder, And How To Decode</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo=anasfanani/anasfanani.github.io data-repo-id=R_kgDOKyjQBg data-category=Announcements data-category-id=DIC_kwDOKyjQBs4CbZXp data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"noborder_dark")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2024 Anas Fanani</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.27.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

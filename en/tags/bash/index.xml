@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bash on Anas Fanani</title><link>https://anasfanani.com/en/tags/bash/</link><description>Recent content in Bash on Anas Fanani</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 01 Apr 2024 08:24:00 +0700</lastBuildDate><atom:link href="https://anasfanani.com/en/tags/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>Shell Script Compiler / Encoder, And How To Decode</title><link>https://anasfanani.com/en/p/shell-script-compiler-/-encoder-and-how-to-decode/</link><pubDate>Mon, 01 Apr 2024 08:24:00 +0700</pubDate><guid>https://anasfanani.com/en/p/shell-script-compiler-/-encoder-and-how-to-decode/</guid><description>&lt;h2 id="shell-compiler">Shell Compiler
+&lt;/h2>&lt;p>Shell compiler source code can be found at this repo &lt;a class="link" href="https://github.com/neurobin/shc" title="https\://github.com/neurobin/shc"
+target="_blank" rel="noopener"
+>https://github.com/neurobin/shc&lt;/a>.&lt;/p>
+&lt;p>You may need to read the &lt;a class="link" href="https://github.com/neurobin/shc/blob/master/README" target="_blank" rel="noopener"
+>README.md&lt;/a> at their repo carefully .&lt;/p>
+&lt;h3 id="quick-start">Quick Start
+&lt;/h3>&lt;p>A quickstart for usage the &lt;code>shc&lt;/code> a.k.a shell compiler from me:&lt;/p>
+&lt;h4 id="build-from-source-using-github-codespace">Build from source using GitHub codespace
+&lt;/h4>&lt;p>Go to github codespace &lt;a class="link" href="https://github.com/codespaces" target="_blank" rel="noopener"
+>https://github.com/codespaces&lt;/a> and create new, or you may go to &lt;a class="link" href="https://github.com/neurobin/shc" target="_blank" rel="noopener"
+>https://github.com/neurobin/shc&lt;/a> and select create codespace.&lt;/p>
+&lt;p>Then input this command to configure.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git clone https://github.com/neurobin/shc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> shc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./configure
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">make
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo make install
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Create simple file named as &lt;code>test.sh&lt;/code> :&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#!/bin/sh
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;hello world&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">id
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">uname -a
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then use &lt;code>shc&lt;/code> with this command :&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">shc -f test.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>We got two file, &lt;code>test.sh.x&lt;/code> and &lt;code>test.sh.c&lt;/code>, for now while type this article, i dont know at much what is &lt;code>test.sh.c&lt;/code> file for.&lt;/p>
+&lt;p>Lets chmod for allow executing the binary.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">chmod +x ./test.sh.x
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then execute the binary :&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">./test.sh.x
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Sample output :&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@anasfanani ➜ /workspaces/ (master) $ ./test.sh.x
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">hello world
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">uid=1000(codespace) gid=1000(codespace) groups=1000(codespace),106(ssh),107(docker),988(pipx),989(python),990(oryx),991(golang),992(sdkman),993(rvm),994(php),995(conda),996(nvs),997(nvm),998(hugo),999(dotnet)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Linux codespaces-67d0c2 5.15.0-1041-azure #48-Ubuntu SMP Tue Jun 20 20:34:08 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Trying to read the file with &lt;code>cat ./test.sh.x | head -n 2&lt;/code> :&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">@@@@��3@8
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> �
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">��kX���O�퐖��GNU��@��ݣk�e�mĹ�@9��a &amp;gt;S-Z�rLy��; �(����Q�tdR�td-==��/lib64/ld-linux-x86-64.so.2GNU�GNU��
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> �J E��!��!��&amp;#34;����libc.so.6exitsprintf__isoc99_sscanftime__stack_chk_failgetpidstrdupcallocstrlenmemset__errno_locationmemcmpputenvmemcpymallocgetenvs�����iieuipfwrit@�?��?�?�?�B�B(?0?8?@?H?P?X?trer`?r__libc_start_main__environ__xstatGLIBC_2.7GLIBC_2.14GLIBC_2.4GLIBC_2.2.5_ITM_deregisterTMCloneTable__gmon_start___ITM_registerTMCloneTableii
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">h?
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> p?
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">�?�?�?�?�?�?�?�?�?�?�?��H�H��/H��t��H���5�.��%�.��h���������h���������h���������h��������h��������h��������h��������h��q��������a������h ��Q������h
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then using &lt;code>file test.sh.x&lt;/code> :&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">test.sh.x: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=bcdc0dde1319c86b5802a7b9c34f9eed909684e2, for GNU/Linux 3.2.0, stripped
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;h2 id="deobfuscate--decompile">Deobfuscate / Decompile
+&lt;/h2>&lt;p>Found how to decompile the binary from &lt;a class="link" href="https://github.com/neurobin/shc/issues/99" title="https\://github.com/neurobin/shc/issues/99"
+target="_blank" rel="noopener"
+>https://github.com/neurobin/shc/issues/99&lt;/a>.&lt;/p>
+&lt;h3 id="quick-start-1">Quick Start
+&lt;/h3>&lt;p>Lets try the quickstart from me using this snippet :&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git clone https://github.com/niansa/bash-shxdumper
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd bash-shxdumper
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./configure
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">make -j$(nproc) || make
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>At this point, we got new modified &lt;code>./bash&lt;/code> file, now move this bash file to the system :&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo mv /bin/bash /bin/bash.bak &amp;amp;&amp;amp; sudo cp ./bash /bin/bash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Dont worry, your original bash is backup to &lt;code>/bin/bash.bak&lt;/code>, I dont need told you about this.&lt;/p>
+&lt;p>Now we try to deobfuscate &lt;code>./test.sh.x&lt;/code> files :&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">OUTFILE=./decrypted.sh ./test.sh.x
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>And result is failed to deobfuscate ( -_- ).&lt;/p>
+&lt;p>It seems the shc update their code, shxdumper doesnt work again.&lt;/p>
+&lt;p>I have another trick to show the running code from process, while you run a shx code, you can see the source with &lt;code>ps -aux | grep ./test.sh.x&lt;/code> the code is showing in process list, but you cant see again if process already killed, thats all I know.&lt;/p>
+&lt;p>I wont write much more because I&amp;rsquo;m boring and this blog is for my personal note.&lt;/p></description></item></channel></rss>

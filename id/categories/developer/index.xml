@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Developer on Anas Fanani</title><link>https://anasfanani.com/id/categories/developer/</link><description>Recent content in Developer on Anas Fanani</description><generator>Hugo -- gohugo.io</generator><language>id</language><lastBuildDate>Thu, 07 Sep 2023 15:38:37 +0700</lastBuildDate><atom:link href="https://anasfanani.com/id/categories/developer/index.xml" rel="self" type="application/rss+xml"/><item><title>Mengalihkan semua URL saat migrasi ke domain baru</title><link>https://anasfanani.com/id/p/mengalihkan-semua-url-saat-migrasi-ke-domain-baru/</link><pubDate>Thu, 07 Sep 2023 15:38:37 +0700</pubDate><guid>https://anasfanani.com/id/p/mengalihkan-semua-url-saat-migrasi-ke-domain-baru/</guid><description>&lt;p>If you plan to migrate to new domain, this article is for you. follow me the steps.&lt;/p>
+&lt;h2 id="requirements">Requirements
+&lt;/h2>&lt;ul>
+&lt;li>CloudFlare account.&lt;/li>
+&lt;li>Your domain allready on CloudFlare.&lt;/li>
+&lt;/ul>
+&lt;h2 id="steps">Steps
+&lt;/h2>&lt;p>Go to the cloudflare dashboard and select your old domain.&lt;/p>
+&lt;p>Navigate to &lt;strong>Rules&lt;/strong> &amp;gt; &lt;strong>Redirect Rules&lt;/strong>.&lt;/p>
+&lt;p>Click on &lt;strong>Create Rule&lt;/strong> button.&lt;/p>
+&lt;p>Input your &lt;em>Rule name&lt;/em> (required), as example i will input &lt;code>movedomain&lt;/code>&lt;/p>
+&lt;p>When incoming requests match… select &lt;strong>All incoming requests&lt;/strong>&lt;/p>
+&lt;p>Then in &lt;strong>URL redirect&lt;/strong> input this :&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Value&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Type&lt;/td>
+&lt;td>Dynamic&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Expression&lt;/td>
+&lt;td>concat(&amp;ldquo;&lt;a class="link" href="https://yournewdomain.com" target="_blank" rel="noopener"
+>https://yournewdomain.com&lt;/a>&amp;rdquo;, http.request.uri.path)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Status code&lt;/td>
+&lt;td>301&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>In Checkbox &lt;strong>Preserve query string&lt;/strong> dont forget to tick it.&lt;/p>
+&lt;p>Verify redirect works with browse to your old domain name.&lt;/p></description></item><item><title>Menyembunyikan default redirect di CPanel dengan CloudFlare</title><link>https://anasfanani.com/id/p/menyembunyikan-default-redirect-di-cpanel-dengan-cloudflare/</link><pubDate>Wed, 06 Sep 2023 15:29:24 +0700</pubDate><guid>https://anasfanani.com/id/p/menyembunyikan-default-redirect-di-cpanel-dengan-cloudflare/</guid><description>&lt;p>cPanel is a popular hosting control panel that provides a variety of features and tools to help you manage your website. However, the default cPanel redirect can be a security risk. This redirect sends users to the cPanel login page when they enter your domain name in their browser. This can make it easier for hackers to find your cPanel login information and your real IP address.&lt;/p>
+&lt;p>To hide the default cPanel redirect, you can use Cloudflare. Cloudflare is a content delivery network (CDN) that can help improve the performance and security of your website. To hide the default cPanel redirect with Cloudflare, follow these steps:&lt;/p>
+&lt;h2 id="requirements">Requirements
+&lt;/h2>&lt;ul>
+&lt;li>A Cloudflare account.&lt;/li>
+&lt;li>Your website must already be on Cloudflare.&lt;/li>
+&lt;/ul>
+&lt;h2 id="steps">Steps
+&lt;/h2>&lt;h3 id="login-to-cloudflare">Login to CloudFlare
+&lt;/h3>&lt;p>Go to the Cloudflare dashboard: &lt;a class="link" href="https://dash.cloudflare.com/" target="_blank" rel="noopener"
+>https://dash.cloudflare.com/&lt;/a>.&lt;/p>
+&lt;h3 id="create-rules">Create Rules
+&lt;/h3>&lt;p>Click on the &lt;strong>Rules&lt;/strong> tab and select &lt;strong>Transform Rules&lt;/strong>.&lt;/p>
+&lt;p>Scroll down to the &lt;strong>Custom Records&lt;/strong> section.&lt;/p>
+&lt;p>Click on the &lt;strong>Create Rule&lt;/strong> button.&lt;/p>
+&lt;p>In the &lt;strong>Name&lt;/strong> field, enter a name for the rule, such as &lt;code>Disable Default Redirect CPanel&lt;/code>.&lt;/p>
+&lt;p>In the &lt;strong>When incoming requests match…&lt;/strong> section, select &lt;strong>Custom filter expression&lt;/strong> and click on &lt;strong>Edit Expression&lt;/strong>.
+Enter the following value for the expression:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> (http.request.uri.path eq &amp;#34;/cpanel&amp;#34;) or (http.request.uri.path
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> eq &amp;#34;/whm&amp;#34;) or (http.request.uri.path eq &amp;#34;/webmail&amp;#34;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This expression will match any request that comes in to the Cloudflare proxy with a URI path of &lt;code>/cpanel&lt;/code>, &lt;code>/whm&lt;/code>, or &lt;code>/webmail&lt;/code>.&lt;/p>
+&lt;p>In the &lt;strong>Path&lt;/strong> section, select &lt;strong>Rewrite to…&lt;/strong> and select &lt;strong>Static&lt;/strong>. Then, enter &lt;code>/not-found&lt;/code> in the field below. This will tell Cloudflare to rewrite any requests that match the expression to a page with the URI path of &lt;code>/not-found&lt;/code>.&lt;/p>
+&lt;p>In the &lt;strong>Query&lt;/strong> section, select &lt;strong>Preserve&lt;/strong>. This will ensure that any query parameters that are included in the request are also included in the rewritten request.&lt;/p>
+&lt;p>Click on the &lt;strong>Save&lt;/strong> button.&lt;/p>
+&lt;p>That&amp;rsquo;s it! Cloudflare will now redirect any requests that match the expression to a page with the URI path of &lt;code>/not-found&lt;/code>. This will help to hide your cPanel login information and your real IP address from potential hackers.&lt;/p></description></item></channel></rss>

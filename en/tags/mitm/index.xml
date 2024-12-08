@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MITM on Anas Fanani</title><link>https://anasfanani.com/en/tags/mitm/</link><description>Recent content in MITM on Anas Fanani</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 01 Apr 2024 08:00:00 +0700</lastBuildDate><atom:link href="https://anasfanani.com/en/tags/mitm/index.xml" rel="self" type="application/rss+xml"/><item><title>Mitm Proxy And Proxy Chain Linux Programs In Ubuntu</title><link>https://anasfanani.com/en/p/mitm-proxy-and-proxy-chain-linux-programs-in-ubuntu/</link><pubDate>Mon, 01 Apr 2024 08:00:00 +0700</pubDate><guid>https://anasfanani.com/en/p/mitm-proxy-and-proxy-chain-linux-programs-in-ubuntu/</guid><description>&lt;p>This is how to set up MITM proxy and proxychains4 in Linux Ubuntu.&lt;/p>
+&lt;h2 id="setup-mitm-proxy">Setup Mitm Proxy
+&lt;/h2>&lt;p>Update and install mitmproxy&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt install mitmproxy -y
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Run and install certificate&lt;/p>
+&lt;p>Ref : &lt;a class="link" href="https://docs.mitmproxy.org/stable/concepts-certificates/#quick-setup" target="_blank" rel="noopener"
+>Certificates&lt;/a>&lt;/p>
+&lt;p>Run with :&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">mitmweb --no-web-open-browser --web-host 0.0.0.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then install certificate&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">curl --proxy 127.0.0.1:8080 --cacert ~/.mitmproxy/mitmproxy-ca-cert.pem https://example.com/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">openssl x509 -in ~/.mitmproxy/mitmproxy-ca-cert.pem -inform PEM -out ~/.mitmproxy/mitmproxy-ca-cert.crt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo mkdir /usr/local/share/ca-certificates/extra
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo cp ~/.mitmproxy/mitmproxy-ca-cert.crt /usr/local/share/ca-certificates/extra/mitmproxy-ca-cert.crt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo update-ca-certificates
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Verify certificate and https mitm is working&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">curl https://ipinfo.io -x 0.0.0.0:8080 -v
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="setup-proxychains4">Setup Proxychains4
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt install proxychains4 -y
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo sed -i -e &lt;span class="s1">&amp;#39;s/proxy_dns/# proxy_dns/g&amp;#39;&lt;/span> -e &lt;span class="s1">&amp;#39;s/socks4\s\+127.0.0.1\s\+9050/# socks4 127.0.0.1 9050/g&amp;#39;&lt;/span> -e &lt;span class="s1">&amp;#39;$a\http 0.0.0.0 8080&amp;#39;&lt;/span> /etc/proxychains4.conf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">proxychains4 curl https://ipinfo.io
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>Redirect all Linux traffict to HTTP/HTTPS/Socks Proxy (Fiddler,Burp)</title><link>https://anasfanani.com/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/</link><pubDate>Fri, 09 Dec 2022 02:48:17 +0700</pubDate><guid>https://anasfanani.com/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/</guid><description>&lt;p>Lets start with simple opening, we dont talk about what is &lt;em>Fiddler&lt;/em> , we talk about how to redirect all traffict to proxy.&lt;/p>
+&lt;p>Login as &lt;code>root&lt;/code> first.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">user@ubuntuserver:/home/user# sudo su
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>First we need download &lt;code>redsocks&lt;/code> and &lt;code>iptables&lt;/code> in the Linux VM.
+Use this command &lt;code>apt install redsocks iptables -y&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">root@ubuntuserver:/home/user# apt install redsocks iptables -y
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then simply apply this code bellow, you can customize it for what you need.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">iptables -t nat -N REDSOCKS
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Exclude local and reserved addresses
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -t nat -A REDSOCKS -d 0.0.0.0/8 -j RETURN
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -t nat -A REDSOCKS -d 10.0.0.0/8 -j RETURN
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -t nat -A REDSOCKS -d 127.0.0.0/8 -j RETURN
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -t nat -A REDSOCKS -d 169.254.0.0/16 -j RETURN
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -t nat -A REDSOCKS -d 172.16.0.0/12 -j RETURN
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -t nat -A REDSOCKS -d 192.168.0.0/16 -j RETURN
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -t nat -A REDSOCKS -d 224.0.0.0/4 -j RETURN
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -t nat -A REDSOCKS -d 240.0.0.0/4 -j RETURN
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Now we need to add a rule that will redirect all packets from our custom REDSOCKS chain to the local port, we will use the default one – 12345
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -t nat -A REDSOCKS -p tcp -j REDIRECT --to-ports 12345
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Redirect all HTTP and HTTPS outgoing packets through Redsocks
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># iptables -t nat -A OUTPUT -p tcp --dport 443 -j REDSOCKS
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># iptables -t nat -A OUTPUT -p tcp --dport 80 -j REDSOCKS
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Redirect all HTTP and HTTPS incoming packets through Redsocks
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDSOCKS
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDSOCKS
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## Filter all traffic from the own host
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## BE CAREFULL HERE IF THE PROXY-SERVER RUNS ON THIS MACHINE
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -t nat -A OUTPUT -p tcp -j REDSOCKS
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Filter all traffic that is routed over this host
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iptables -t nat -A PREROUTING -p tcp -j REDSOCKS
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>After all set, we need configure &lt;code>/etc/redsocks.conf&lt;/code>
+Here the default configuration :&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;span class="lnt">66
+&lt;/span>&lt;span class="lnt">67
+&lt;/span>&lt;span class="lnt">68
+&lt;/span>&lt;span class="lnt">69
+&lt;/span>&lt;span class="lnt">70
+&lt;/span>&lt;span class="lnt">71
+&lt;/span>&lt;span class="lnt">72
+&lt;/span>&lt;span class="lnt">73
+&lt;/span>&lt;span class="lnt">74
+&lt;/span>&lt;span class="lnt">75
+&lt;/span>&lt;span class="lnt">76
+&lt;/span>&lt;span class="lnt">77
+&lt;/span>&lt;span class="lnt">78
+&lt;/span>&lt;span class="lnt">79
+&lt;/span>&lt;span class="lnt">80
+&lt;/span>&lt;span class="lnt">81
+&lt;/span>&lt;span class="lnt">82
+&lt;/span>&lt;span class="lnt">83
+&lt;/span>&lt;span class="lnt">84
+&lt;/span>&lt;span class="lnt">85
+&lt;/span>&lt;span class="lnt">86
+&lt;/span>&lt;span class="lnt">87
+&lt;/span>&lt;span class="lnt">88
+&lt;/span>&lt;span class="lnt">89
+&lt;/span>&lt;span class="lnt">90
+&lt;/span>&lt;span class="lnt">91
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">base&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">debug&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">connection&lt;/span> &lt;span class="n">progress&lt;/span> &lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">client&lt;/span> &lt;span class="n">list&lt;/span> &lt;span class="n">on&lt;/span> &lt;span class="n">SIGUSR1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">log_debug&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">off&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">info&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">start&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">end&lt;/span> &lt;span class="n">of&lt;/span> &lt;span class="n">client&lt;/span> &lt;span class="n">session&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">log_info&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">on&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">/*&lt;/span> &lt;span class="n">possible&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="nb">log&lt;/span>&lt;span class="s1">&amp;#39; values are:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*&lt;/span> &lt;span class="n">stderr&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*&lt;/span> &lt;span class="s2">&amp;#34;file:/path/to/file&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*&lt;/span> &lt;span class="n">syslog&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="n">FACILITY&lt;/span> &lt;span class="n">facility&lt;/span> &lt;span class="n">is&lt;/span> &lt;span class="n">any&lt;/span> &lt;span class="n">of&lt;/span> &lt;span class="s2">&amp;#34;daemon&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;local0&amp;#34;&lt;/span>&lt;span class="o">...&lt;/span>&lt;span class="s2">&amp;#34;local7&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">log&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;syslog:daemon&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">detach&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="n">console&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">daemon&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">on&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">/*&lt;/span> &lt;span class="n">Change&lt;/span> &lt;span class="n">uid&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">gid&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">root&lt;/span> &lt;span class="n">directory&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">these&lt;/span> &lt;span class="n">options&lt;/span> &lt;span class="n">require&lt;/span> &lt;span class="n">root&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*&lt;/span> &lt;span class="n">privilegies&lt;/span> &lt;span class="n">on&lt;/span> &lt;span class="n">startup&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*&lt;/span> &lt;span class="n">Note&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">your&lt;/span> &lt;span class="n">chroot&lt;/span> &lt;span class="n">may&lt;/span> &lt;span class="n">requre&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="n">etc&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">localtime&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="n">you&lt;/span> &lt;span class="n">write&lt;/span> &lt;span class="nb">log&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">syslog&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*&lt;/span> &lt;span class="n">Log&lt;/span> &lt;span class="n">is&lt;/span> &lt;span class="n">opened&lt;/span> &lt;span class="n">before&lt;/span> &lt;span class="n">chroot&lt;/span> &lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">uid&lt;/span> &lt;span class="n">changing&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">user&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">redsocks&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">group&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">redsocks&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">chroot&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;/var/chroot&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">/*&lt;/span> &lt;span class="n">possible&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="n">redirector&lt;/span>&lt;span class="s1">&amp;#39; values are:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*&lt;/span> &lt;span class="n">iptables&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">Linux&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*&lt;/span> &lt;span class="n">ipf&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">FreeBSD&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*&lt;/span> &lt;span class="n">pf&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">OpenBSD&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*&lt;/span> &lt;span class="n">generic&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">some&lt;/span> &lt;span class="n">generic&lt;/span> &lt;span class="n">redirector&lt;/span> &lt;span class="n">that&lt;/span> &lt;span class="n">MAY&lt;/span> &lt;span class="n">work&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">redirector&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">iptables&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">redsocks&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">/*&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="n">local_ip&lt;/span>&lt;span class="s1">&amp;#39; defaults to 127.0.0.1 for security reasons,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*&lt;/span> &lt;span class="n">use&lt;/span> &lt;span class="mf">0.0&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="mf">0.0&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="n">you&lt;/span> &lt;span class="n">want&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">listen&lt;/span> &lt;span class="n">on&lt;/span> &lt;span class="n">every&lt;/span> &lt;span class="n">interface&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="n">local_&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="s1">&amp;#39; are used as port to redirect to.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">local_ip&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mf">127.0&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="mf">0.1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">local_port&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">12345&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="n">ip&lt;/span>&lt;span class="s1">&amp;#39; and `port&amp;#39;&lt;/span> &lt;span class="n">are&lt;/span> &lt;span class="ne">IP&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">tcp&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">port&lt;/span> &lt;span class="n">of&lt;/span> &lt;span class="n">proxy&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">server&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">You&lt;/span> &lt;span class="n">can&lt;/span> &lt;span class="n">also&lt;/span> &lt;span class="n">use&lt;/span> &lt;span class="n">hostname&lt;/span> &lt;span class="n">instead&lt;/span> &lt;span class="n">of&lt;/span> &lt;span class="ne">IP&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">only&lt;/span> &lt;span class="n">one&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">random&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">address&lt;/span> &lt;span class="n">of&lt;/span> &lt;span class="n">multihomed&lt;/span> &lt;span class="n">host&lt;/span> &lt;span class="n">will&lt;/span> &lt;span class="n">be&lt;/span> &lt;span class="n">used&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ip&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mf">172.26&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="mf">160.1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">port&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">8888&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">known&lt;/span> &lt;span class="n">types&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">socks4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">socks5&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">http&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">connect&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">http&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">relay&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">type&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">http&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">connect&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">login&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;foobar&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">password&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;baz&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">redudp&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="n">local_ip&lt;/span>&lt;span class="s1">&amp;#39; should not be 0.0.0.0 as it&amp;#39;&lt;/span>&lt;span class="n">s&lt;/span> &lt;span class="n">also&lt;/span> &lt;span class="n">used&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">outgoing&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">packets&lt;/span> &lt;span class="n">that&lt;/span> &lt;span class="n">are&lt;/span> &lt;span class="n">sent&lt;/span> &lt;span class="n">as&lt;/span> &lt;span class="n">replies&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">it&lt;/span> &lt;span class="n">should&lt;/span> &lt;span class="n">be&lt;/span> &lt;span class="n">fixed&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="n">we&lt;/span> &lt;span class="n">want&lt;/span> &lt;span class="n">NAT&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">work&lt;/span> &lt;span class="n">properly&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">local_ip&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mf">127.0&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="mf">0.1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">local_port&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">10053&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="n">ip&lt;/span>&lt;span class="s1">&amp;#39; and `port&amp;#39;&lt;/span> &lt;span class="n">of&lt;/span> &lt;span class="n">socks5&lt;/span> &lt;span class="n">proxy&lt;/span> &lt;span class="n">server&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ip&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mf">192.0&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="mf">2.1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">port&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1080&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">login&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">username&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">password&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">pazzw0rd&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">kernel&lt;/span> &lt;span class="n">does&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="n">give&lt;/span> &lt;span class="n">us&lt;/span> &lt;span class="n">this&lt;/span> &lt;span class="n">information&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">so&lt;/span> &lt;span class="n">we&lt;/span> &lt;span class="n">have&lt;/span> &lt;span class="n">to&lt;/span> &lt;span class="n">duplicate&lt;/span> &lt;span class="n">it&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">both&lt;/span> &lt;span class="n">iptables&lt;/span> &lt;span class="n">rules&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">configuration&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span> &lt;span class="n">By&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">way&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">you&lt;/span> &lt;span class="n">can&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">set&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="n">local_ip&lt;/span>&lt;span class="s1">&amp;#39; to 127.45.67.89 if you need more than 65535 ports to&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">forward&lt;/span> &lt;span class="p">;&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">This&lt;/span> &lt;span class="n">limitation&lt;/span> &lt;span class="n">may&lt;/span> &lt;span class="n">be&lt;/span> &lt;span class="n">relaxed&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">future&lt;/span> &lt;span class="n">versions&lt;/span> &lt;span class="n">using&lt;/span> &lt;span class="n">contrack&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">tools&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">dest_ip&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mf">192.0&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="mf">2.2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">dest_port&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">53&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">udp_timeout&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">30&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">udp_timeout_stream&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">180&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">dnstc&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">fake&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">really&lt;/span> &lt;span class="n">dumb&lt;/span> &lt;span class="n">DNS&lt;/span> &lt;span class="n">server&lt;/span> &lt;span class="n">that&lt;/span> &lt;span class="n">returns&lt;/span> &lt;span class="s2">&amp;#34;truncated answer&amp;#34;&lt;/span> &lt;span class="n">to&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">every&lt;/span> &lt;span class="n">query&lt;/span> &lt;span class="n">via&lt;/span> &lt;span class="n">UDP&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">RFC&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">compliant&lt;/span> &lt;span class="n">resolver&lt;/span> &lt;span class="n">should&lt;/span> &lt;span class="n">repeat&lt;/span> &lt;span class="n">same&lt;/span> &lt;span class="n">query&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="n">via&lt;/span> &lt;span class="n">TCP&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">this&lt;/span> &lt;span class="k">case&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">local_ip&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mf">127.0&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="mf">0.1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">local_port&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">5300&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">//&lt;/span> &lt;span class="n">you&lt;/span> &lt;span class="n">can&lt;/span> &lt;span class="n">add&lt;/span> &lt;span class="n">more&lt;/span> &lt;span class="err">`&lt;/span>&lt;span class="n">redsocks&lt;/span>&lt;span class="s1">&amp;#39; and `redudp&amp;#39;&lt;/span> &lt;span class="n">sections&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="n">you&lt;/span> &lt;span class="n">need&lt;/span>&lt;span class="o">.&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>In the &lt;code>/etc/redsocks.conf&lt;/code> configuration, edit &lt;code>ip&lt;/code> &lt;code>port&lt;/code> &lt;code>type&lt;/code> inside &lt;code>redsocks { }&lt;/code>
+You can use nano or vim&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">root@ubuntuserver:/home/user# nano /etc/redsocks.conf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Then edit this :&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ip = 172.26.160.1;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">port = 8888;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">type = http-connect;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>this is our proxy configuration, if you dont know what the ip host (Windows host) inside VM, you can check it with CMD, type it &lt;code>ipconfig&lt;/code>&lt;/p>
+&lt;p>Output is like this :&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">C:UsersAdministrator&amp;gt;ipconfig
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Windows IP Configuration
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Ethernet adapter vEthernet (Default Switch):
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Connection-specific DNS Suffix . :
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Link-local IPv6 Address . . . . . : fe80::bf56:d73a:13b2:84ef%27
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> IPv4 Address. . . . . . . . . . . : 172.26.160.1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Subnet Mask . . . . . . . . . . . : 255.255.240.0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Default Gateway . . . . . . . . . :
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Ethernet adapter vEthernet (WSL):
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Connection-specific DNS Suffix . :
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Link-local IPv6 Address . . . . . : fe80::3100:e28a:3a04:80ad%36
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> IPv4 Address. . . . . . . . . . . : 172.20.48.1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Subnet Mask . . . . . . . . . . . : 255.255.240.0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Default Gateway . . . . . . . . . :
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>After all set, restart the redsocks using &lt;code>pkill redsocks&lt;/code> , then start again with &lt;code>redsocks&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">root@ubuntuserver:/home/user# pkill redsocks
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">root@ubuntuserver:/home/user# redsocks
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">root@ubuntuserver:/home/user#
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Try to execute command like &lt;code>curl&lt;/code> or &lt;code>wget&lt;/code> (make sure proxy is running)&lt;/p>
+&lt;p>execute curl with proxy : &lt;code>curl --proxy 172.26.160.1:8888 google.com&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">root@ubuntuserver:/home/user# curl --proxy 172.26.160.1:8888 google.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;HTML&amp;gt;&amp;lt;HEAD&amp;gt;&amp;lt;meta http-equiv=&amp;#34;content-type&amp;#34; content=&amp;#34;text/html;charset=utf-8&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;TITLE&amp;gt;301 Moved&amp;lt;/TITLE&amp;gt;&amp;lt;/HEAD&amp;gt;&amp;lt;BODY&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;H1&amp;gt;301 Moved&amp;lt;/H1&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">The document has moved
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;A HREF=&amp;#34;http://www.google.com/&amp;#34;&amp;gt;here&amp;lt;/A&amp;gt;.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/BODY&amp;gt;&amp;lt;/HTML&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">root@ubuntuserver:/home/user# curl --proxy 172.26.160.1:8888 anasfanani.id
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">root@ubuntuserver:/home/user#
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Off course we can see the traffict in fiddler proxy because we set &lt;code>--proxy&lt;/code> in curl&lt;/p>
+&lt;p>&lt;img src="https://anasfanani.com/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/1.png"
+width="1621"
+height="731"
+srcset="https://anasfanani.com/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/1_hu16593496602515559158.png 480w, https://anasfanani.com/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/1_hu4215191192047869801.png 1024w"
+loading="lazy"
+alt="Traffic fiddler proxy"
+class="gallery-image"
+data-flex-grow="221"
+data-flex-basis="532px"
+>&lt;/p>
+&lt;p>So lets use &lt;code>curl&lt;/code> without &lt;code>--proxy&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">root@ubuntuserver:/home/user# curl google.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;HTML&amp;gt;&amp;lt;HEAD&amp;gt;&amp;lt;meta http-equiv=&amp;#34;content-type&amp;#34; content=&amp;#34;text/html;charset=utf-8&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;TITLE&amp;gt;301 Moved&amp;lt;/TITLE&amp;gt;&amp;lt;/HEAD&amp;gt;&amp;lt;BODY&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;H1&amp;gt;301 Moved&amp;lt;/H1&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">The document has moved
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;A HREF=&amp;#34;http://www.google.com/&amp;#34;&amp;gt;here&amp;lt;/A&amp;gt;.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;lt;/BODY&amp;gt;&amp;lt;/HTML&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://anasfanani.com/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/2.png"
+width="1621"
+height="736"
+srcset="https://anasfanani.com/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/2_hu5199357959186500083.png 480w, https://anasfanani.com/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/2_hu1899299694458086081.png 1024w"
+loading="lazy"
+alt="Captured Packet"
+class="gallery-image"
+data-flex-grow="220"
+data-flex-basis="528px"
+>&lt;/p>
+&lt;p>Lets use with other linux program like &lt;code>php&lt;/code> , execute &lt;code>php -r &amp;quot;echo file_get_contents('http://ifconfig.me');&amp;quot;&lt;/code> and see the Fiddler&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">root@ubuntuserver:/home/user# php -r &amp;#34;echo file_get_contents(&amp;#39;http://ifconfig.me&amp;#39;);&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://anasfanani.com/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/3.png"
+width="1617"
+height="732"
+srcset="https://anasfanani.com/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/3_hu17557739231043031679.png 480w, https://anasfanani.com/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/3_hu7270944465004683230.png 1024w"
+loading="lazy"
+alt="Get IP Example"
+class="gallery-image"
+data-flex-grow="220"
+data-flex-basis="530px"
+>&lt;/p>
+&lt;p>You can try see the packet from &lt;code>apt update&lt;/code> or any other command.&lt;/p>
+&lt;p>&lt;img src="https://anasfanani.com/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/4.png"
+width="1616"
+height="730"
+srcset="https://anasfanani.com/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/4_hu10233287121365466460.png 480w, https://anasfanani.com/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/4_hu3408594707755287485.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="221"
+data-flex-basis="531px"
+>&lt;/p>
+&lt;p>All is set, simple, if you have questions, ask in comments. Thanks&lt;/p></description></item></channel></rss>

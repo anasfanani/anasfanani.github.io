@@ -1,0 +1,347 @@
+<!doctype html><html lang=en dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Tutorial to redirect all traffic in the Linux system to HTTP/HTTPS/Socks Proxy (Fiddler,Burp) and other proxy. Redirect TOR Proxy is possible too."><title>Redirect all Linux traffict to HTTP/HTTPS/Socks Proxy (Fiddler,Burp)</title>
+<link rel=canonical href=https://anasfanani.com/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/><link rel=stylesheet href=/scss/style.min.css><meta property='og:title' content="Redirect all Linux traffict to HTTP/HTTPS/Socks Proxy (Fiddler,Burp)"><meta property='og:description' content="Tutorial to redirect all traffic in the Linux system to HTTP/HTTPS/Socks Proxy (Fiddler,Burp) and other proxy. Redirect TOR Proxy is possible too."><meta property='og:url' content='https://anasfanani.com/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/'><meta property='og:site_name' content='Anas Fanani'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Proxy'><meta property='article:tag' content='MITM'><meta property='article:published_time' content='2022-12-09T02:48:17+07:00'><meta property='article:modified_time' content='2022-12-09T02:48:17+07:00'><meta name=twitter:title content="Redirect all Linux traffict to HTTP/HTTPS/Socks Proxy (Fiddler,Burp)"><meta name=twitter:description content="Tutorial to redirect all traffic in the Linux system to HTTP/HTTPS/Socks Proxy (Fiddler,Burp) and other proxy. Redirect TOR Proxy is possible too."><link rel="shortcut icon" href=/favicon.png><script async src="https://www.googletagmanager.com/gtag/js?id=G-WL12DSR5GX"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-WL12DSR5GX")}</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/en/><img src=/img/avatar_hu12057436127379827588.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/en>Anas Fanani</a></h1><h2 class=site-description>A notes...</h2></div></header><ol class=menu-social><li><a href=https://github.com/anasfanani target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://stackoverflow.com/users/12716228 target=_blank title="Stack Overflow" rel=me><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-stackoverflow"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v1a2 2 0 002 2h12a2 2 0 002-2v-1"/><path d="M8 16h8"/><path d="M8.322 12.582l7.956.836"/><path d="M8.787 9.168l7.826 1.664"/><path d="M10.096 5.764l7.608 2.472"/></svg></a></li><li><a href=https://xdaforums.com/m/9512959 target=_blank title="XDA Forums" rel=me><svg width="24" height="24" viewBox="0 0 192 192" fill="none" stroke=""><path stroke-linecap="round" stroke-linejoin="round" stroke-width="12" d="M82 38H42v108h40l8 24m20-132h40v108h-40"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/en/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/en/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/en/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li><a href=/en/about/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>About</span></a></li><li class=menu-bottom-section><ol class=menu><li id=i18n-switch><svg class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg>
+<select name=language title=language onchange="window.location.href=this.selectedOptions[0].value"><option value=https://anasfanani.com/en/ selected>English</option><option value=https://anasfanani.com/id/>Bahasa Indonesia</option></select></li><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/en/categories/linux/>Linux</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/>Redirect all Linux traffict to HTTP/HTTPS/Socks Proxy (Fiddler,Burp)</a></h2><h3 class=article-subtitle>Tutorial to redirect all traffic in the Linux system to HTTP/HTTPS/Socks Proxy (Fiddler,Burp) and other proxy. Redirect TOR Proxy is possible too.</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Dec 09, 2022</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>6 minute read</time></div></footer><footer class=article-translations><svg class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5h7"/><path d="M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c-.003 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9"/><path d="M19.1 18h-6.2"/></svg><div><a href=https://anasfanani.com/id/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/ class=link>Bahasa Indonesia</a></div></footer></div></header><section class=article-content><p>Lets start with simple opening, we dont talk about what is <em>Fiddler</em> , we talk about how to redirect all traffict to proxy.</p><p>Login as <code>root</code> first.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>user@ubuntuserver:/home/user# sudo su
+</span></span></code></pre></td></tr></table></div></div><p>First we need download <code>redsocks</code> and <code>iptables</code> in the Linux VM.
+Use this command <code>apt install redsocks iptables -y</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>root@ubuntuserver:/home/user# apt install redsocks iptables -y
+</span></span></code></pre></td></tr></table></div></div><p>Then simply apply this code bellow, you can customize it for what you need.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>iptables -t nat -N REDSOCKS
+</span></span><span class=line><span class=cl># Exclude local and reserved addresses
+</span></span><span class=line><span class=cl>iptables -t nat -A REDSOCKS -d 0.0.0.0/8 -j RETURN
+</span></span><span class=line><span class=cl>iptables -t nat -A REDSOCKS -d 10.0.0.0/8 -j RETURN
+</span></span><span class=line><span class=cl>iptables -t nat -A REDSOCKS -d 127.0.0.0/8 -j RETURN
+</span></span><span class=line><span class=cl>iptables -t nat -A REDSOCKS -d 169.254.0.0/16 -j RETURN
+</span></span><span class=line><span class=cl>iptables -t nat -A REDSOCKS -d 172.16.0.0/12 -j RETURN
+</span></span><span class=line><span class=cl>iptables -t nat -A REDSOCKS -d 192.168.0.0/16 -j RETURN
+</span></span><span class=line><span class=cl>iptables -t nat -A REDSOCKS -d 224.0.0.0/4 -j RETURN
+</span></span><span class=line><span class=cl>iptables -t nat -A REDSOCKS -d 240.0.0.0/4 -j RETURN
+</span></span><span class=line><span class=cl># Now we need to add a rule that will redirect all packets from our custom REDSOCKS chain to the local port, we will use the default one – 12345
+</span></span><span class=line><span class=cl>iptables -t nat -A REDSOCKS -p tcp -j REDIRECT --to-ports 12345
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Redirect all HTTP and HTTPS outgoing packets through Redsocks
+</span></span><span class=line><span class=cl># iptables -t nat -A OUTPUT -p tcp --dport 443 -j REDSOCKS
+</span></span><span class=line><span class=cl># iptables -t nat -A OUTPUT -p tcp --dport 80 -j REDSOCKS
+</span></span><span class=line><span class=cl># Redirect all HTTP and HTTPS incoming packets through Redsocks
+</span></span><span class=line><span class=cl># iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDSOCKS
+</span></span><span class=line><span class=cl># iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDSOCKS
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>## Filter all traffic from the own host
+</span></span><span class=line><span class=cl>## BE CAREFULL HERE IF THE PROXY-SERVER RUNS ON THIS MACHINE
+</span></span><span class=line><span class=cl>iptables -t nat -A OUTPUT     -p tcp -j REDSOCKS 
+</span></span><span class=line><span class=cl># Filter all traffic that is routed over this host
+</span></span><span class=line><span class=cl>iptables -t nat -A PREROUTING -p tcp -j REDSOCKS
+</span></span></code></pre></td></tr></table></div></div><p>After all set, we need configure <code>/etc/redsocks.conf</code>
+Here the default configuration :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span><span class=lnt>81
+</span><span class=lnt>82
+</span><span class=lnt>83
+</span><span class=lnt>84
+</span><span class=lnt>85
+</span><span class=lnt>86
+</span><span class=lnt>87
+</span><span class=lnt>88
+</span><span class=lnt>89
+</span><span class=lnt>90
+</span><span class=lnt>91
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>base</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>debug</span><span class=p>:</span> <span class=n>connection</span> <span class=n>progress</span> <span class=o>&amp;</span> <span class=n>client</span> <span class=n>list</span> <span class=n>on</span> <span class=n>SIGUSR1</span>
+</span></span><span class=line><span class=cl>        <span class=n>log_debug</span> <span class=o>=</span> <span class=n>off</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>info</span><span class=p>:</span> <span class=n>start</span> <span class=ow>and</span> <span class=n>end</span> <span class=n>of</span> <span class=n>client</span> <span class=n>session</span>
+</span></span><span class=line><span class=cl>        <span class=n>log_info</span> <span class=o>=</span> <span class=n>on</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=o>/*</span> <span class=n>possible</span> <span class=err>`</span><span class=nb>log</span><span class=s1>&#39; values are:</span>
+</span></span><span class=line><span class=cl>         <span class=o>*</span>   <span class=n>stderr</span>
+</span></span><span class=line><span class=cl>         <span class=o>*</span>   <span class=s2>&#34;file:/path/to/file&#34;</span>
+</span></span><span class=line><span class=cl>         <span class=o>*</span>   <span class=n>syslog</span><span class=p>:</span><span class=n>FACILITY</span>  <span class=n>facility</span> <span class=n>is</span> <span class=n>any</span> <span class=n>of</span> <span class=s2>&#34;daemon&#34;</span><span class=p>,</span> <span class=s2>&#34;local0&#34;</span><span class=o>...</span><span class=s2>&#34;local7&#34;</span>
+</span></span><span class=line><span class=cl>         <span class=o>*/</span>
+</span></span><span class=line><span class=cl>        <span class=nb>log</span> <span class=o>=</span> <span class=s2>&#34;syslog:daemon&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>detach</span> <span class=n>from</span> <span class=n>console</span>
+</span></span><span class=line><span class=cl>        <span class=n>daemon</span> <span class=o>=</span> <span class=n>on</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=o>/*</span> <span class=n>Change</span> <span class=n>uid</span><span class=p>,</span> <span class=n>gid</span> <span class=ow>and</span> <span class=n>root</span> <span class=n>directory</span><span class=p>,</span> <span class=n>these</span> <span class=n>options</span> <span class=n>require</span> <span class=n>root</span>
+</span></span><span class=line><span class=cl>         <span class=o>*</span> <span class=n>privilegies</span> <span class=n>on</span> <span class=n>startup</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>         <span class=o>*</span> <span class=n>Note</span><span class=p>,</span> <span class=n>your</span> <span class=n>chroot</span> <span class=n>may</span> <span class=n>requre</span> <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>localtime</span> <span class=k>if</span> <span class=n>you</span> <span class=n>write</span> <span class=nb>log</span> <span class=n>to</span> <span class=n>syslog</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>         <span class=o>*</span> <span class=n>Log</span> <span class=n>is</span> <span class=n>opened</span> <span class=n>before</span> <span class=n>chroot</span> <span class=o>&amp;</span> <span class=n>uid</span> <span class=n>changing</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>         <span class=o>*/</span>
+</span></span><span class=line><span class=cl>        <span class=n>user</span> <span class=o>=</span> <span class=n>redsocks</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>group</span> <span class=o>=</span> <span class=n>redsocks</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>chroot</span> <span class=o>=</span> <span class=s2>&#34;/var/chroot&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=o>/*</span> <span class=n>possible</span> <span class=err>`</span><span class=n>redirector</span><span class=s1>&#39; values are:</span>
+</span></span><span class=line><span class=cl>         <span class=o>*</span>   <span class=n>iptables</span>   <span class=o>-</span> <span class=k>for</span> <span class=n>Linux</span>
+</span></span><span class=line><span class=cl>         <span class=o>*</span>   <span class=n>ipf</span>        <span class=o>-</span> <span class=k>for</span> <span class=n>FreeBSD</span>
+</span></span><span class=line><span class=cl>         <span class=o>*</span>   <span class=n>pf</span>         <span class=o>-</span> <span class=k>for</span> <span class=n>OpenBSD</span>
+</span></span><span class=line><span class=cl>         <span class=o>*</span>   <span class=n>generic</span>    <span class=o>-</span> <span class=n>some</span> <span class=n>generic</span> <span class=n>redirector</span> <span class=n>that</span> <span class=n>MAY</span> <span class=n>work</span>
+</span></span><span class=line><span class=cl>         <span class=o>*/</span>
+</span></span><span class=line><span class=cl>        <span class=n>redirector</span> <span class=o>=</span> <span class=n>iptables</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>redsocks</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>/*</span> <span class=err>`</span><span class=n>local_ip</span><span class=s1>&#39; defaults to 127.0.0.1 for security reasons,</span>
+</span></span><span class=line><span class=cl>         <span class=o>*</span> <span class=n>use</span> <span class=mf>0.0</span><span class=o>.</span><span class=mf>0.0</span> <span class=k>if</span> <span class=n>you</span> <span class=n>want</span> <span class=n>to</span> <span class=n>listen</span> <span class=n>on</span> <span class=n>every</span> <span class=n>interface</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>         <span class=o>*</span> <span class=err>`</span><span class=n>local_</span><span class=o>*</span><span class=s1>&#39; are used as port to redirect to.</span>
+</span></span><span class=line><span class=cl>         <span class=o>*/</span>
+</span></span><span class=line><span class=cl>        <span class=n>local_ip</span> <span class=o>=</span> <span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>local_port</span> <span class=o>=</span> <span class=mi>12345</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=err>`</span><span class=n>ip</span><span class=s1>&#39; and `port&#39;</span> <span class=n>are</span> <span class=ne>IP</span> <span class=ow>and</span> <span class=n>tcp</span><span class=o>-</span><span class=n>port</span> <span class=n>of</span> <span class=n>proxy</span><span class=o>-</span><span class=n>server</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>You</span> <span class=n>can</span> <span class=n>also</span> <span class=n>use</span> <span class=n>hostname</span> <span class=n>instead</span> <span class=n>of</span> <span class=ne>IP</span><span class=p>,</span> <span class=n>only</span> <span class=n>one</span> <span class=p>(</span><span class=n>random</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>address</span> <span class=n>of</span> <span class=n>multihomed</span> <span class=n>host</span> <span class=n>will</span> <span class=n>be</span> <span class=n>used</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>        <span class=n>ip</span> <span class=o>=</span> <span class=mf>172.26</span><span class=o>.</span><span class=mf>160.1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>port</span> <span class=o>=</span> <span class=mi>8888</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>known</span> <span class=n>types</span><span class=p>:</span> <span class=n>socks4</span><span class=p>,</span> <span class=n>socks5</span><span class=p>,</span> <span class=n>http</span><span class=o>-</span><span class=n>connect</span><span class=p>,</span> <span class=n>http</span><span class=o>-</span><span class=n>relay</span>
+</span></span><span class=line><span class=cl>        <span class=n>type</span> <span class=o>=</span> <span class=n>http</span><span class=o>-</span><span class=n>connect</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>login</span> <span class=o>=</span> <span class=s2>&#34;foobar&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>password</span> <span class=o>=</span> <span class=s2>&#34;baz&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>redudp</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=err>`</span><span class=n>local_ip</span><span class=s1>&#39; should not be 0.0.0.0 as it&#39;</span><span class=n>s</span> <span class=n>also</span> <span class=n>used</span> <span class=k>for</span> <span class=n>outgoing</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>packets</span> <span class=n>that</span> <span class=n>are</span> <span class=n>sent</span> <span class=n>as</span> <span class=n>replies</span> <span class=o>-</span> <span class=ow>and</span> <span class=n>it</span> <span class=n>should</span> <span class=n>be</span> <span class=n>fixed</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=k>if</span> <span class=n>we</span> <span class=n>want</span> <span class=n>NAT</span> <span class=n>to</span> <span class=n>work</span> <span class=n>properly</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>        <span class=n>local_ip</span> <span class=o>=</span> <span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>local_port</span> <span class=o>=</span> <span class=mi>10053</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=err>`</span><span class=n>ip</span><span class=s1>&#39; and `port&#39;</span> <span class=n>of</span> <span class=n>socks5</span> <span class=n>proxy</span> <span class=n>server</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>        <span class=n>ip</span> <span class=o>=</span> <span class=mf>192.0</span><span class=o>.</span><span class=mf>2.1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>port</span> <span class=o>=</span> <span class=mi>1080</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>login</span> <span class=o>=</span> <span class=n>username</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>password</span> <span class=o>=</span> <span class=n>pazzw0rd</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>kernel</span> <span class=n>does</span> <span class=ow>not</span> <span class=n>give</span> <span class=n>us</span> <span class=n>this</span> <span class=n>information</span><span class=p>,</span> <span class=n>so</span> <span class=n>we</span> <span class=n>have</span> <span class=n>to</span> <span class=n>duplicate</span> <span class=n>it</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=ow>in</span> <span class=n>both</span> <span class=n>iptables</span> <span class=n>rules</span> <span class=ow>and</span> <span class=n>configuration</span> <span class=n>file</span><span class=o>.</span>  <span class=n>By</span> <span class=n>the</span> <span class=n>way</span><span class=p>,</span> <span class=n>you</span> <span class=n>can</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>set</span> <span class=err>`</span><span class=n>local_ip</span><span class=s1>&#39; to 127.45.67.89 if you need more than 65535 ports to</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>forward</span> <span class=p>;</span><span class=o>-</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>This</span> <span class=n>limitation</span> <span class=n>may</span> <span class=n>be</span> <span class=n>relaxed</span> <span class=ow>in</span> <span class=n>future</span> <span class=n>versions</span> <span class=n>using</span> <span class=n>contrack</span><span class=o>-</span><span class=n>tools</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>        <span class=n>dest_ip</span> <span class=o>=</span> <span class=mf>192.0</span><span class=o>.</span><span class=mf>2.2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>dest_port</span> <span class=o>=</span> <span class=mi>53</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=n>udp_timeout</span> <span class=o>=</span> <span class=mi>30</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>udp_timeout_stream</span> <span class=o>=</span> <span class=mi>180</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>dnstc</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>fake</span> <span class=ow>and</span> <span class=n>really</span> <span class=n>dumb</span> <span class=n>DNS</span> <span class=n>server</span> <span class=n>that</span> <span class=n>returns</span> <span class=s2>&#34;truncated answer&#34;</span> <span class=n>to</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>every</span> <span class=n>query</span> <span class=n>via</span> <span class=n>UDP</span><span class=p>,</span> <span class=n>RFC</span><span class=o>-</span><span class=n>compliant</span> <span class=n>resolver</span> <span class=n>should</span> <span class=n>repeat</span> <span class=n>same</span> <span class=n>query</span>
+</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=n>via</span> <span class=n>TCP</span> <span class=ow>in</span> <span class=n>this</span> <span class=k>case</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>        <span class=n>local_ip</span> <span class=o>=</span> <span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>local_port</span> <span class=o>=</span> <span class=mi>5300</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>//</span> <span class=n>you</span> <span class=n>can</span> <span class=n>add</span> <span class=n>more</span> <span class=err>`</span><span class=n>redsocks</span><span class=s1>&#39; and `redudp&#39;</span> <span class=n>sections</span> <span class=k>if</span> <span class=n>you</span> <span class=n>need</span><span class=o>.</span>
+</span></span></code></pre></td></tr></table></div></div><p>In the <code>/etc/redsocks.conf</code> configuration, edit <code>ip</code> <code>port</code> <code>type</code> inside <code>redsocks { }</code>
+You can use nano or vim</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>root@ubuntuserver:/home/user# nano /etc/redsocks.conf
+</span></span></code></pre></td></tr></table></div></div><p>Then edit this :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>ip = 172.26.160.1;
+</span></span><span class=line><span class=cl>port = 8888;
+</span></span><span class=line><span class=cl>type = http-connect;
+</span></span></code></pre></td></tr></table></div></div><p>this is our proxy configuration, if you dont know what the ip host (Windows host) inside VM, you can check it with CMD, type it <code>ipconfig</code></p><p>Output is like this :</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>C:UsersAdministrator&gt;ipconfig
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Windows IP Configuration
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Ethernet adapter vEthernet (Default Switch):
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>   Connection-specific DNS Suffix  . :
+</span></span><span class=line><span class=cl>   Link-local IPv6 Address . . . . . : fe80::bf56:d73a:13b2:84ef%27
+</span></span><span class=line><span class=cl>   IPv4 Address. . . . . . . . . . . : 172.26.160.1
+</span></span><span class=line><span class=cl>   Subnet Mask . . . . . . . . . . . : 255.255.240.0
+</span></span><span class=line><span class=cl>   Default Gateway . . . . . . . . . :
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Ethernet adapter vEthernet (WSL):
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>   Connection-specific DNS Suffix  . :
+</span></span><span class=line><span class=cl>   Link-local IPv6 Address . . . . . : fe80::3100:e28a:3a04:80ad%36
+</span></span><span class=line><span class=cl>   IPv4 Address. . . . . . . . . . . : 172.20.48.1
+</span></span><span class=line><span class=cl>   Subnet Mask . . . . . . . . . . . : 255.255.240.0
+</span></span><span class=line><span class=cl>   Default Gateway . . . . . . . . . :
+</span></span></code></pre></td></tr></table></div></div><p>After all set, restart the redsocks using <code>pkill redsocks</code> , then start again with <code>redsocks</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>root@ubuntuserver:/home/user# pkill redsocks
+</span></span><span class=line><span class=cl>root@ubuntuserver:/home/user# redsocks
+</span></span><span class=line><span class=cl>root@ubuntuserver:/home/user#
+</span></span></code></pre></td></tr></table></div></div><p>Try to execute command like <code>curl</code> or <code>wget</code> (make sure proxy is running)</p><p>execute curl with proxy : <code>curl --proxy 172.26.160.1:8888 google.com</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>root@ubuntuserver:/home/user# curl --proxy 172.26.160.1:8888 google.com
+</span></span><span class=line><span class=cl>&lt;HTML&gt;&lt;HEAD&gt;&lt;meta http-equiv=&#34;content-type&#34; content=&#34;text/html;charset=utf-8&#34;&gt;
+</span></span><span class=line><span class=cl>&lt;TITLE&gt;301 Moved&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;
+</span></span><span class=line><span class=cl>&lt;H1&gt;301 Moved&lt;/H1&gt;
+</span></span><span class=line><span class=cl>The document has moved
+</span></span><span class=line><span class=cl>&lt;A HREF=&#34;http://www.google.com/&#34;&gt;here&lt;/A&gt;.
+</span></span><span class=line><span class=cl>&lt;/BODY&gt;&lt;/HTML&gt;
+</span></span><span class=line><span class=cl>root@ubuntuserver:/home/user# curl --proxy 172.26.160.1:8888 anasfanani.id
+</span></span><span class=line><span class=cl>root@ubuntuserver:/home/user#
+</span></span></code></pre></td></tr></table></div></div><p>Off course we can see the traffict in fiddler proxy because we set <code>--proxy</code> in curl</p><p><img src=/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/1.png width=1621 height=731 srcset="/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/1_hu16593496602515559158.png 480w, /en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/1_hu4215191192047869801.png 1024w" loading=lazy alt="Traffic fiddler proxy" class=gallery-image data-flex-grow=221 data-flex-basis=532px></p><p>So lets use <code>curl</code> without <code>--proxy</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>root@ubuntuserver:/home/user# curl google.com
+</span></span><span class=line><span class=cl>&lt;HTML&gt;&lt;HEAD&gt;&lt;meta http-equiv=&#34;content-type&#34; content=&#34;text/html;charset=utf-8&#34;&gt;
+</span></span><span class=line><span class=cl>&lt;TITLE&gt;301 Moved&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;
+</span></span><span class=line><span class=cl>&lt;H1&gt;301 Moved&lt;/H1&gt;
+</span></span><span class=line><span class=cl>The document has moved
+</span></span><span class=line><span class=cl>&lt;A HREF=&#34;http://www.google.com/&#34;&gt;here&lt;/A&gt;.
+</span></span><span class=line><span class=cl>&lt;/BODY&gt;&lt;/HTML&gt;
+</span></span></code></pre></td></tr></table></div></div><p><img src=/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/2.png width=1621 height=736 srcset="/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/2_hu5199357959186500083.png 480w, /en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/2_hu1899299694458086081.png 1024w" loading=lazy alt="Captured Packet" class=gallery-image data-flex-grow=220 data-flex-basis=528px></p><p>Lets use with other linux program like <code>php</code> , execute <code>php -r "echo file_get_contents('http://ifconfig.me');"</code> and see the Fiddler</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>root@ubuntuserver:/home/user# php -r &#34;echo file_get_contents(&#39;http://ifconfig.me&#39;);&#34;
+</span></span></code></pre></td></tr></table></div></div><p><img src=/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/3.png width=1617 height=732 srcset="/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/3_hu17557739231043031679.png 480w, /en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/3_hu7270944465004683230.png 1024w" loading=lazy alt="Get IP Example" class=gallery-image data-flex-grow=220 data-flex-basis=530px></p><p>You can try see the packet from <code>apt update</code> or any other command.</p><p><img src=/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/4.png width=1616 height=730 srcset="/en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/4_hu10233287121365466460.png 480w, /en/p/redirect-all-linux-traffict-to-http/https/socks-proxy-fiddlerburp/4_hu3408594707755287485.png 1024w" loading=lazy class=gallery-image data-flex-grow=221 data-flex-basis=531px></p><p>All is set, simple, if you have questions, ask in comments. Thanks</p></section><footer class=article-footer><section class=article-tags><a href=/en/tags/proxy/>Proxy</a>
+<a href=/en/tags/mitm/>MITM</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/en/p/mitm-proxy-and-proxy-chain-linux-programs-in-ubuntu/><div class=article-details><h2 class=article-title>Mitm Proxy And Proxy Chain Linux Programs In Ubuntu</h2></div></a></article><article><a href=/en/p/various-open-source-proxy-installation/><div class=article-details><h2 class=article-title>Various Open Source Proxy Installation</h2></div></a></article><article><a href=/en/p/how-to-install-and-use-the-shadowtls-proxy/><div class=article-details><h2 class=article-title>How to install and use the ShadowTLS Proxy</h2></div></a></article><article><a href=/en/p/shell-script-compiler-/-encoder-and-how-to-decode/><div class=article-details><h2 class=article-title>Shell Script Compiler / Encoder, And How To Decode</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo=anasfanani/anasfanani.github.io data-repo-id=R_kgDOKyjQBg data-category=Announcements data-category-id=DIC_kwDOKyjQBs4CbZXp data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"noborder_dark")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2024 Anas Fanani</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.27.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
